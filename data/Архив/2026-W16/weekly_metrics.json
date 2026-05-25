@@ -1,0 +1,141 @@
+{
+  "week_label": "2026-W16",
+  "week_start": "2026-04-13",
+  "week_end": "2026-04-19",
+  "geography": "Russia",
+  "prepared_at": "2026-04-21T12:00:00+03:00",
+  "totals": {
+    "raw_items": 12,
+    "normalized_items": 10,
+    "duplicates_removed": 2,
+    "unique_sources": 6
+  },
+  "topic_metrics": [
+    {
+      "topic": "macro",
+      "item_count": 4,
+      "avg_signal_strength": 4.5,
+      "status": "dominant",
+      "comment": "Неделя задается макрофоном: ставка 15%, инфляция около 5,9%, безработица 2,1%."
+    },
+    {
+      "topic": "talent_shortage",
+      "item_count": 3,
+      "avg_signal_strength": 3.7,
+      "status": "cooling_but_persistent",
+      "comment": "Дефицит кадров сохраняется, но общая напряженность рынка снижается."
+    },
+    {
+      "topic": "it_market",
+      "item_count": 2,
+      "avg_signal_strength": 4.5,
+      "status": "selective_cooling",
+      "comment": "В ИТ высокий уровень зарплат сочетается с более слабым спросом на часть ролей."
+    },
+    {
+      "topic": "salary",
+      "item_count": 4,
+      "avg_signal_strength": 4.0,
+      "status": "polarized",
+      "comment": "Зарплаты больше растут в прикладных и инфраструктурных сегментах, чем по рынку в целом."
+    }
+  ],
+  "region_metrics": [
+    {
+      "region": "RU",
+      "status": "tight_market",
+      "comment": "Безработица остается на исторически низком уровне."
+    },
+    {
+      "region": "Northwest_FD",
+      "status": "hotspots_present",
+      "comment": "Инвестпроекты поддерживают локальный спрос на персонал."
+    },
+    {
+      "region": "Moscow",
+      "status": "salary_pressure",
+      "comment": "Наиболее заметный рост зарплат фиксируется в транспорте и строительстве."
+    }
+  ],
+  "industry_metrics": [
+    {
+      "industry": "it",
+      "status": "more_employer_friendly",
+      "comment": "Кандидатов больше, вакансий меньше; зарплаты все еще высокие."
+    },
+    {
+      "industry": "construction",
+      "status": "tight",
+      "comment": "Сохраняется высокий спрос и повышательное давление на зарплаты."
+    },
+    {
+      "industry": "services",
+      "status": "tight",
+      "comment": "Сегменты ЖКХ и прикладных сервисов продолжают испытывать дефицит работников."
+    }
+  ],
+  "macro_factors": [
+    {
+      "factor": "key_rate",
+      "value": 15.0,
+      "comment": "Жесткая денежно-кредитная политика сдерживает агрессивный рост найма."
+    },
+    {
+      "factor": "inflation_yoy_march_2026",
+      "value": 5.86,
+      "comment": "Инфляция остается выше цели и поддерживает осторожность работодателей."
+    },
+    {
+      "factor": "unemployment_feb_2026",
+      "value": 2.1,
+      "comment": "Даже при охлаждении спроса рынок труда все еще очень tight."
+    }
+  ],
+  "top_signals": [
+    {
+      "topic": "macro",
+      "signal_type": "macro_shift",
+      "strength": 5,
+      "label": "Жесткие денежные условия сохраняются"
+    },
+    {
+      "topic": "it_market",
+      "signal_type": "hiring_slowdown",
+      "strength": 5,
+      "label": "ИТ-рынок стал заметно более конкурентным для кандидатов"
+    },
+    {
+      "topic": "salary",
+      "signal_type": "salary_stabilization",
+      "strength": 4,
+      "label": "Зарплатная гонка по рынку ослабевает"
+    },
+    {
+      "topic": "talent_shortage",
+      "signal_type": "hiring_growth",
+      "strength": 3,
+      "label": "В инфраструктурных и рабочих сегментах дефицит сохраняется"
+    }
+  ],
+  "comparison": {
+    "vs_prev_week": [
+      {
+        "topic": "macro",
+        "direction": "up",
+        "comment": "Фон стал чуть мягче за счет роста индикатора бизнес-климата."
+      },
+      {
+        "topic": "salary",
+        "direction": "down",
+        "comment": "Сигналы указывают на ослабление общего зарплатного давления."
+      },
+      {
+        "topic": "it_market",
+        "direction": "flat_to_down",
+        "comment": "Структурно рынок ИТ остается менее горячим, чем год назад."
+      }
+    ],
+    "vs_4w_avg": [],
+    "vs_8w_avg": []
+  }
+}

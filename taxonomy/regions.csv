@@ -1,0 +1,12 @@
+region_id,region_name,country,status
+RU,Россия,RU,active
+Moscow,Москва,RU,active
+Saint_Petersburg,Санкт-Петербург,RU,active
+Central_FD,Центральный федеральный округ,RU,active
+Northwest_FD,Северо-Западный федеральный округ,RU,active
+Volga_FD,Приволжский федеральный округ,RU,active
+Ural_FD,Уральский федеральный округ,RU,active
+Siberia_FD,Сибирский федеральный округ,RU,active
+Far_East_FD,Дальневосточный федеральный округ,RU,active
+South_FD,Южный федеральный округ,RU,active
+North_Caucasus_FD,Северо-Кавказский федеральный округ,RU,active

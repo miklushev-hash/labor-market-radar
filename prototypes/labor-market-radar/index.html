@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Labor Market Radar</title>
+  <style>
+    :root {
+      --bg: #f6f7f3;
+      --panel: #ffffff;
+      --ink: #17211c;
+      --muted: #647067;
+      --line: #d9ded5;
+      --green: #1f7a5a;
+      --teal: #0f7f8c;
+      --red: #b4473f;
+      --amber: #bd7d22;
+      --blue: #315f9f;
+      --shadow: 0 18px 44px rgba(37, 47, 42, .12);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #fff 0, var(--bg) 360px);
+      color: var(--ink);
+    }
+
+    button, select { font: inherit; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 264px 1fr;
+      min-width: 0;
+    }
+
+    aside {
+      border-right: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(18px);
+      padding: 22px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      min-width: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      background: conic-gradient(from 180deg, var(--green), var(--teal), var(--blue), var(--green));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .brand strong { display: block; font-size: 15px; }
+    .brand span { color: var(--muted); font-size: 12px; }
+
+    .nav {
+      display: grid;
+      gap: 8px;
+    }
+
+    .nav button {
+      border: 1px solid transparent;
+      background: transparent;
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .nav button.active {
+      background: #eef5ef;
+      border-color: #cfe0d2;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .side-block {
+      margin-top: 28px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcf9;
+    }
+
+    .side-block small {
+      color: var(--muted);
+      display: block;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    main {
+      padding: 24px;
+      min-width: 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 38px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.45;
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    select, .chip {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      min-height: 38px;
+      padding: 8px 10px;
+      color: var(--ink);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      min-width: 0;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .delta {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .positive { color: var(--green); }
+    .negative { color: var(--red); }
+    .warning { color: var(--amber); }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .chart {
+      display: grid;
+      grid-template-columns: 84px 1fr 46px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .bar {
+      height: 12px;
+      border-radius: 999px;
+      background: #e7ece5;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      background: var(--c);
+      border-radius: inherit;
+    }
+
+    .chart label, .chart b {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .signals {
+      display: grid;
+      gap: 10px;
+    }
+
+    .signal {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+    }
+
+    .signal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .signal strong { font-size: 15px; }
+
+    .badge {
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      white-space: nowrap;
+      background: #eef3f0;
+      color: var(--muted);
+    }
+
+    .signal p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: 13px;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(118px, 1fr));
+      gap: 8px;
+    }
+
+    .cell {
+      min-height: 112px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cell b { font-size: 13px; }
+    .cell span { color: var(--muted); font-size: 12px; line-height: 1.35; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(110px, 1fr));
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 11px;
+      min-height: 108px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .flow-step small, .risk small {
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .risk-board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .risk {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 12px;
+      display: grid;
+      gap: 7px;
+      min-height: 150px;
+    }
+
+    .risk strong {
+      font-size: 15px;
+    }
+
+    .score {
+      width: fit-content;
+      border: 1px solid #d5dfd7;
+      border-radius: 8px;
+      padding: 4px 7px;
+      background: #f4f8f5;
+      font-size: 12px;
+      color: var(--ink);
+    }
+
+    .action {
+      border-left: 4px solid var(--green);
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 126px;
+    }
+
+    .action:nth-child(2) { border-color: var(--blue); }
+    .action:nth-child(3) { border-color: var(--amber); }
+    .action b { display: block; margin-bottom: 8px; }
+    .action p { margin: 0; color: var(--muted); line-height: 1.42; font-size: 13px; }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .table th, .table td {
+      text-align: left;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .table th {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      aside {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      aside, main {
+        width: 100%;
+        max-width: 100vw;
+      }
+      .nav { grid-template-columns: repeat(3, 1fr); }
+      .topbar { flex-direction: column; }
+      .controls { justify-content: flex-start; }
+      .span-3, .span-4, .span-5, .span-7, .span-8 { grid-column: span 12; }
+      .matrix, .actions, .flow, .risk-board { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      main { padding: 16px; }
+      aside { padding: 16px; }
+      .nav { grid-template-columns: 1fr; }
+      .chart { grid-template-columns: 76px 1fr 36px; }
+      select {
+        max-width: 100%;
+        min-width: 0;
+      }
+      h1 { font-size: 28px; }
+      .metric-value { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <div class="mark">LM</div>
+        <div>
+          <strong>Labor Market Radar</strong>
+          <span>Оценка рынка труда</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Разделы">
+        <button class="active" data-view="dashboard">Радар</button>
+        <button data-view="signals">Сигналы</button>
+        <button data-view="company">Внутренний контур</button>
+        <button data-view="brief">Вывод</button>
+      </nav>
+      <div class="side-block">
+        <small>Локальный прототип целевого продукта. Внешний контур основан на логике обзоров, внутренний контур показан на демонстрационных агрегатах.</small>
+      </div>
+    </aside>
+
+    <main>
+      <section class="topbar">
+        <div>
+          <h1>Радар рынка труда и внутренних рисков</h1>
+          <p class="subtitle">Прототип связывает внешний сигнал с практикой, критичной компетенцией и кадровым действием. Там, где основание еще требует эксперта, интерфейс показывает это прямо.</p>
+        </div>
+        <div class="controls">
+          <select id="period">
+            <option value="month">Апрель 2026</option>
+            <option value="quarter">Q1 2026</option>
+            <option value="year">2025 год</option>
+          </select>
+          <select id="mode">
+            <option value="radar">Общий радар</option>
+            <option value="pilot">Внутренний пилот</option>
+          </select>
+          <select id="practice">
+            <option value="all">Все практики</option>
+            <option value="onec">1С</option>
+            <option value="devops">DevOps / инфраструктура</option>
+            <option value="data">ИИ / данные</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="dashboard" class="view grid">
+        <article class="panel span-3">
+          <div class="metric-label">Индекс состояния рынка</div>
+          <div class="metric-value" id="marketIndex">62</div>
+          <div class="delta warning" id="marketDelta">Осторожный найм</div>
+        </article>
+        <article class="panel span-3">
+          <div class="metric-label">Сила зарплатного давления</div>
+          <div class="metric-value" id="salaryPressure">38</div>
+          <div class="delta" id="salaryDelta">Рост замедлился</div>
+        </article>
+        <article class="panel span-3">
+          <div class="metric-label">Внутренняя экспозиция</div>
+          <div class="metric-value" id="candidateCompetition">71</div>
+          <div class="delta negative" id="candidateDelta">Критичные роли затронуты</div>
+        </article>
+        <article class="panel span-3">
+          <div class="metric-label">Доказательность вывода</div>
+          <div class="metric-value" id="evidenceScore">84</div>
+          <div class="delta positive" id="evidenceDelta">Сильная база</div>
+        </article>
+
+        <article class="panel span-7">
+          <h2>Контуры влияния</h2>
+          <div class="chart">
+            <label>Макро</label><div class="bar"><span style="--w:82%;--c:var(--blue)"></span></div><b>82</b>
+            <label>Работодатели</label><div class="bar"><span style="--w:76%;--c:var(--teal)"></span></div><b>76</b>
+            <label>Вакансии</label><div class="bar"><span style="--w:68%;--c:var(--green)"></span></div><b>68</b>
+            <label>Зарплаты</label><div class="bar"><span style="--w:42%;--c:var(--amber)"></span></div><b>42</b>
+            <label>ИИ-сдвиги</label><div class="bar"><span style="--w:73%;--c:var(--red)"></span></div><b>73</b>
+          </div>
+        </article>
+
+        <article class="panel span-5">
+          <h2>Главный вывод</h2>
+          <div class="signals">
+            <div class="signal">
+              <div class="signal-head">
+                <strong>Рынок охладился без системного кризиса</strong>
+                <span class="badge">устойчивый тренд</span>
+              </div>
+              <p>Работодатели переходят от расширения штата к точечному найму, контролю ФОТ и повышению требований к прикладной отдаче роли.</p>
+            </div>
+            <div class="signal">
+              <div class="signal-head">
+                <strong>Сегментация ИТ-ролей усилилась</strong>
+                <span class="badge">сильный сигнал</span>
+              </div>
+              <p>Начинающим стало сложнее, а сильные middle/senior специалисты и роли с ИИ/данными остаются ценными.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Путь от сигнала к решению</h2>
+          <div class="flow" id="decisionFlow"></div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Рекомендации для работодателя</h2>
+          <div class="actions">
+            <div class="action">
+              <b>Найм</b>
+              <p>Ускорять закрытие критичных middle/senior ролей, но не расширять штат “на вырост” без понятной экономики позиции.</p>
+            </div>
+            <div class="action">
+              <b>Удержание</b>
+              <p>Фокусировать удержание на ролях с прямой проектной отдачей, редкими компетенциями и высоким риском замены.</p>
+            </div>
+            <div class="action">
+              <b>Компенсации</b>
+              <p>Переходить от фронтальной индексации к точечной настройке вилок, льгот и бонусов по группам риска.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="signals" class="view grid hidden">
+        <article class="panel span-12">
+          <h2>Матрица сигналов</h2>
+          <div class="matrix">
+            <div class="cell"><b>Мировой контур</b><span>ИИ, ставки, технологические инвестиции и давление на эффективность.</span><span class="badge">73</span></div>
+            <div class="cell"><b>Экономика РФ</b><span>Дорогие деньги повышают цену ошибки найма и избыточного штата.</span><span class="badge">82</span></div>
+            <div class="cell"><b>Рынок труда</b><span>Дефицит становится структурным: важнее качество профиля.</span><span class="badge">76</span></div>
+            <div class="cell"><b>ИТ-рынок</b><span>Спрос смещается к прикладным ролям с быстрой отдачей.</span><span class="badge">68</span></div>
+            <div class="cell"><b>Внутренний контур</b><span>Экспозиция зависит от практики, критичности роли и сложности замены.</span><span class="badge">79</span></div>
+          </div>
+        </article>
+        <article class="panel span-12">
+          <h2>Проверенные сигналы</h2>
+          <table class="table">
+            <thead>
+              <tr><th>Сигнал</th><th>Тип</th><th>Доказательность</th><th>Вывод</th></tr>
+            </thead>
+            <tbody id="signalRows"></tbody>
+          </table>
+        </article>
+      </section>
+
+      <section id="company" class="view grid hidden">
+        <article class="panel span-12">
+          <h2>Риски по практикам и компетенциям</h2>
+          <div class="risk-board" id="riskBoard"></div>
+        </article>
+        <article class="panel span-7">
+          <h2>Что подключается в промышленном режиме</h2>
+          <table class="table">
+            <thead>
+              <tr><th>Внутренний объект</th><th>Нужный агрегат</th><th>Зачем</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Практика</td><td>проектная критичность и дефицит ролей</td><td>понять экспозицию к сигналу</td></tr>
+              <tr><td>Компетенция</td><td>редкость, заместимость, план развития</td><td>развести найм и развитие</td></tr>
+              <tr><td>Роль</td><td>сложность закрытия и риск удержания</td><td>выбрать действие для HR и бизнеса</td></tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="panel span-5">
+          <h2>Ограничение пилота</h2>
+          <div class="signals">
+            <div class="signal">
+              <p>Здесь нет реальных персональных HR-данных. Прототип проверяет логику связки внешнего рынка и внутреннего контура на демонстрационных агрегатах.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="brief" class="view grid hidden">
+        <article class="panel span-8">
+          <h2>Executive summary</h2>
+          <div class="signals">
+            <div class="signal">
+              <p id="summaryText">2025 год закрепил переход рынка труда ИТ от перегрева к осторожному и выборочному найму. Работодателю важно не останавливать критичный найм, но жестче связывать каждую роль с бизнес-эффектом, проектной загрузкой и риском потери компетенции.</p>
+            </div>
+          </div>
+        </article>
+        <article class="panel span-4">
+          <h2>Следующий контур</h2>
+          <div class="signals">
+            <div class="signal"><p>Промышленный запуск добавляет рабочую панель аналитика, версионирование оснований, согласованный внутренний словарь и доступы по ролям.</p></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const data = {
+      all: {
+        marketIndex: 62, salaryPressure: 38, candidateCompetition: 71, evidenceScore: 84,
+        marketDelta: "Осторожный найм", salaryDelta: "Рост замедлился", candidateDelta: "Несколько практик затронуты", evidenceDelta: "Сильная база",
+        rows: [
+          ["Охлаждение рынка без системного кризиса", "устойчивый тренд", "высокая", "Нанимать точнее, не шире"],
+          ["Сегментация ИТ-ролей", "структурный сдвиг", "высокая", "Разделить политику по уровням"],
+          ["Рост роли ИИ и данных", "стратегический сигнал", "средняя+", "Усилить развитие прикладных компетенций"]
+        ],
+        flow: [
+          ["Внешний сигнал", "Спрос смещается к прикладной отдаче роли."],
+          ["Компетенции", "1С, инфраструктура, данные и проектная аналитика."],
+          ["Внутренняя экспозиция", "Риски различаются по практике и заместимости."],
+          ["Действие", "Развести критичный найм, удержание и развитие."],
+          ["Контроль", "Каждый вывод держать на проверенных основаниях."]
+        ],
+        risks: [
+          ["1С", "Архитекторы и ведущие аналитики", "78", "держать точечный найм и внутренний резерв"],
+          ["DevOps / инфраструктура", "Отказоустойчивость и платформенная экспертиза", "84", "сверить удержание критичных специалистов"],
+          ["ИИ / данные", "Прикладное внедрение ИИ", "69", "развивать компетенции до масштабного найма"]
+        ]
+      },
+      onec: {
+        marketIndex: 67, salaryPressure: 46, candidateCompetition: 78, evidenceScore: 81,
+        marketDelta: "Найм остается точечным", salaryDelta: "Давление по редким профилям", candidateDelta: "Высокая зависимость от лидов", evidenceDelta: "Нужна экспертная валидация",
+        rows: [
+          ["Сложность замены ведущих специалистов", "внутренняя экспозиция", "пилот", "Проверить резерв по ключевым проектам"],
+          ["Прикладной опыт важнее общего потока кандидатов", "рыночный сигнал", "средняя+", "Держать профильный скрининг"],
+          ["Развитие аналитиков снижает узкое место", "рекомендация", "гипотеза", "Валидировать с руководителем практики"]
+        ],
+        flow: [
+          ["Рынок", "Избирательный спрос сохраняет цену прикладного опыта."],
+          ["Роль", "Ведущий аналитик и архитектор 1С."],
+          ["Риск", "Проект зависит от редкой связки домена и платформы."],
+          ["Действие", "Сверить резерв, найм и план развития."],
+          ["Владелец", "HRBP и руководитель практики подтверждают вывод."]
+        ],
+        risks: [
+          ["Проектный узел", "Архитектор 1С", "86", "риск замены высокий"],
+          ["Компетенция", "Интеграции и предметная аналитика", "74", "развитие внутри полезнее широкого поиска"],
+          ["Проверка", "Внутренний спрос", "ручная", "нужен агрегат по загрузке и вакансиям"]
+        ]
+      },
+      devops: {
+        marketIndex: 73, salaryPressure: 54, candidateCompetition: 84, evidenceScore: 85,
+        marketDelta: "Критичный найм не останавливать", salaryDelta: "Точечное давление", candidateDelta: "Экспозиция высокая", evidenceDelta: "Сильный внешний контур",
+        rows: [
+          ["Платформенная надежность остается критичной", "структурный сигнал", "высокая", "Не откладывать ключевые закрытия"],
+          ["Высокая цена ухода эксперта", "внутренний риск", "пилот", "Развести удержание и резервирование знаний"],
+          ["Автоматизация меняет профиль роли", "стратегический сигнал", "средняя+", "Развивать инструменты и SRE-практики"]
+        ],
+        flow: [
+          ["Сигнал", "Эффективность и автоматизация меняют ожидания к роли."],
+          ["Компетенция", "DevOps, SRE, инфраструктура и безопасность."],
+          ["Экспозиция", "Проектная непрерывность зависит от малой группы людей."],
+          ["Действие", "Удержание плюс передача знаний."],
+          ["Проверка", "Сопоставить с загрузкой и очередью вакансий."]
+        ],
+        risks: [
+          ["Удержание", "SRE и платформенные инженеры", "88", "требует разговора с владельцем практики"],
+          ["Найм", "Инфраструктурные лиды", "81", "держать приоритет у критичных ролей"],
+          ["Развитие", "Автоматизация эксплуатации", "72", "включить в план upskill"]
+        ]
+      },
+      data: {
+        marketIndex: 76, salaryPressure: 49, candidateCompetition: 69, evidenceScore: 77,
+        marketDelta: "Спрос растет выборочно", salaryDelta: "Цена ошибки высока", candidateDelta: "Экспозиция растет", evidenceDelta: "Сигнал требует проверки",
+        rows: [
+          ["ИИ создает новые ожидания к отдаче роли", "стратегический сигнал", "средняя+", "Не путать хайп с проектной потребностью"],
+          ["Данные важны там, где есть внедрение", "рыночный фильтр", "средняя", "Сверить use cases бизнеса"],
+          ["Внутреннее развитие снижает риск модного найма", "рекомендация", "гипотеза", "Пилотировать на прикладных задачах"]
+        ],
+        flow: [
+          ["Сигнал", "ИИ влияет на спрос и на перераспределение задач."],
+          ["Компетенция", "ML, аналитика данных, внедрение ИИ."],
+          ["Риск", "Модный найм без проектной экономики."],
+          ["Действие", "Развести эксперименты, upskill и критичный найм."],
+          ["Контроль", "Подтвердить спрос внутренним портфелем задач."]
+        ],
+        risks: [
+          ["Спрос", "Прикладные ИИ-сценарии", "76", "подтвердить владельцами задач"],
+          ["Компетенция", "Data engineering", "71", "сверить внутренний резерв"],
+          ["Шум", "Найм ради тренда", "64", "не переводить сигнал в оффер без кейса"]
+        ]
+      }
+    };
+
+    const views = document.querySelectorAll(".view");
+    document.querySelectorAll(".nav button").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".nav button").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        views.forEach(view => view.classList.toggle("hidden", view.id !== button.dataset.view));
+      });
+    });
+
+    function render() {
+      const practice = document.getElementById("practice").value;
+      const mode = document.getElementById("mode").value;
+      const current = data[practice];
+      for (const key of ["marketIndex", "salaryPressure", "candidateCompetition", "evidenceScore"]) {
+        document.getElementById(key).textContent = current[key];
+      }
+      document.getElementById("marketDelta").textContent = current.marketDelta;
+      document.getElementById("salaryDelta").textContent = current.salaryDelta;
+      document.getElementById("candidateDelta").textContent = current.candidateDelta;
+      document.getElementById("evidenceDelta").textContent = current.evidenceDelta;
+      document.getElementById("signalRows").innerHTML = current.rows.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td></tr>`).join("");
+      document.getElementById("decisionFlow").innerHTML = current.flow.map(step => `<div class="flow-step"><b>${step[0]}</b><small>${step[1]}</small></div>`).join("");
+      document.getElementById("riskBoard").innerHTML = current.risks.map(risk => `<div class="risk"><strong>${risk[0]}</strong><span>${risk[1]}</span><span class="score">Приоритет: ${risk[2]}</span><small>${risk[3]}</small></div>`).join("");
+      document.body.dataset.mode = mode;
+      document.getElementById("summaryText").textContent = mode === "pilot"
+        ? "Внутренний пилот показывает, какие внешние сигналы действительно касаются выбранной практики. Следующий шаг для вывода - подтвердить экспозицию агрегатами по ролям, загрузке, сложности найма и риску удержания."
+        : "Радар сначала отделяет подтвержденные внешние сигналы от шума. Затем он связывает их с компетенциями и показывает, где работодателю нужен найм, удержание, развитие или спокойное наблюдение.";
+    }
+
+    document.getElementById("practice").addEventListener("change", render);
+    document.getElementById("mode").addEventListener("change", render);
+    document.getElementById("period").addEventListener("change", event => {
+      const label = event.target.options[event.target.selectedIndex].text;
+      document.getElementById("summaryText").textContent = `${label}: период задает горизонт сигнала. Чем длиннее формат, тем строже подтверждение перед тем, как внешний рынок превращается во внутреннюю рекомендацию.`;
+    });
+    render();
+  </script>
+</body>
+</html>

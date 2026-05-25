@@ -1,0 +1,42 @@
+{
+  "item_id": "uuid",
+  "week_label": "2026-W16",
+  "published_at": "2026-04-20T08:30:00Z",
+  "collected_at": "2026-04-21T06:00:00Z",
+  "source_id": "hh_research",
+  "source_type": "site",
+  "title": "Заголовок",
+  "url": "https://example.com/article",
+  "text": "Нормализованный текст",
+  "summary": "Краткое описание сигнала",
+  "topic_primary": "salary",
+  "topic_secondary": [
+    "it_market"
+  ],
+  "industry": "it",
+  "country": "RU",
+  "region": "Moscow",
+  "signal_type": "salary_growth",
+  "sentiment": "positive",
+  "signal_strength": 4,
+  "entities": [
+    "Банк России",
+    "hh.ru"
+  ],
+  "keywords": [
+    "зарплаты",
+    "найм",
+    "дефицит кадров"
+  ],
+  "is_duplicate": false,
+  "duplicate_group": null,
+  "source_confidence": 2,
+  "verification_status": "supported",
+  "evidence_type": "platform_data",
+  "evidence_sources": [
+    "hh_research"
+  ],
+  "fact_check_notes": "Подтверждено источником с собственной методологией",
+  "classification_confidence": 0.85,
+  "notes": "Подтверждено несколькими источниками"
+}

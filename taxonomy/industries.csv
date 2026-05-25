@@ -1,0 +1,14 @@
+industry_id,industry_name,status
+multi,Мультиотраслевой,active
+it,ИТ,active
+finance,Финансы,active
+retail,Розница,active
+industrial,Промышленность,active
+logistics,Логистика,active
+construction,Строительство,active
+healthcare,Медицина,active
+education,Образование,active
+oil_gas,Нефтегаз,active
+agro,АПК,active
+telecom,Телеком,active
+services,Услуги,active

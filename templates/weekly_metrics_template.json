@@ -1,0 +1,22 @@
+{
+  "week_label": "2026-W16",
+  "week_start": "2026-04-13",
+  "week_end": "2026-04-19",
+  "geography": "Россия",
+  "totals": {
+    "raw_items": 0,
+    "normalized_items": 0,
+    "duplicates_removed": 0,
+    "unique_sources": 0
+  },
+  "topic_metrics": [],
+  "region_metrics": [],
+  "industry_metrics": [],
+  "macro_factors": [],
+  "top_signals": [],
+  "comparison": {
+    "vs_prev_week": [],
+    "vs_4w_avg": [],
+    "vs_8w_avg": []
+  }
+}
