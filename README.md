@@ -58,6 +58,10 @@
 
 - [16_current_situation_radar.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/16_current_situation_radar.md)
 
+Техническая архитектура дашборда и связь `выпуски -> radar_snapshot.json -> прототип` описаны в документе:
+
+- [17_dashboard_technical_architecture.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/17_dashboard_technical_architecture.md)
+
 Рабочие исходные материалы, которые нужны для продукта, но не должны мешать в корне, лежат в папке `source`. К ним относятся рабочая сборка продукта, теоретические материалы и вспомогательные сценарии.
 
 Внутри `Хранилище.xlsx`:

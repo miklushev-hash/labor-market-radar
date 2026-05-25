@@ -87,6 +87,7 @@
 - [14_halfyear_digest.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/14_halfyear_digest.md)
 - [12_annual_digest.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/12_annual_digest.md)
 - [16_current_situation_radar.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/16_current_situation_radar.md)
+- [17_dashboard_technical_architecture.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/17_dashboard_technical_architecture.md)
 
 ## Специальная управляющая команда
 
