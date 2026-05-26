@@ -206,3 +206,5 @@
 Полный регламент:
 
 - [16_current_situation_radar.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/16_current_situation_radar.md)
+- [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/18_snapshot_extraction_rules.md)
+- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/19_index_methodology.md)

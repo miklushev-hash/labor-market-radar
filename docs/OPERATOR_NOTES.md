@@ -88,6 +88,8 @@
 - [12_annual_digest.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/12_annual_digest.md)
 - [16_current_situation_radar.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/16_current_situation_radar.md)
 - [17_dashboard_technical_architecture.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/17_dashboard_technical_architecture.md)
+- [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/18_snapshot_extraction_rules.md)
+- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/19_index_methodology.md)
 
 ## Специальная управляющая команда
 

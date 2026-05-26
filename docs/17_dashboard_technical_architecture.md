@@ -165,6 +165,14 @@ radar_snapshot.json
 
 ## Минимальная схема `radar_snapshot.json`
 
+Правила извлечения структурированного слоя из готовых выпусков описаны в документе:
+
+- [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/18_snapshot_extraction_rules.md)
+
+Методика расчета индексов описана в документе:
+
+- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/19_index_methodology.md)
+
 ```json
 {
   "schema_version": "1.0",
@@ -362,4 +370,3 @@ Dashboard API
 ```
 
 Но логика остается той же: дашборд показывает утвержденный структурированный слой, а не сам придумывает выводы из сырых материалов.
-
