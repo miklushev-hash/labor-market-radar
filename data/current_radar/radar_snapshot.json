@@ -5,7 +5,7 @@
   "created_at": "2026-06-21",
   "status": "pilot",
   "methodology_status": "expert_pilot",
-  "dashboard_binding": "not_connected",
+  "dashboard_binding": "connected_with_fallback",
   "market_mode": {
     "id": "cautious_employer_market_targeted_it_deficit",
     "label": "Осторожный рынок работодателя с точечным дефицитом сильных ИТ-ролей"
@@ -219,9 +219,9 @@
       "manual_check_required": true
     },
     {
-      "id": "dashboard_not_connected",
+      "id": "dashboard_connected_with_fallback",
       "level": "technical",
-      "text": "Публичный дашборд пока использует зашитый демонстрационный массив и не читает этот radar_snapshot.json автоматически.",
+      "text": "Публичный дашборд читает этот radar_snapshot.json, но сохраняет явное fallback-предупреждение на случай ошибки загрузки.",
       "manual_check_required": false
     }
   ],

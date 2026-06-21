@@ -211,4 +211,10 @@ data/current_radar/archive/radar_snapshot_YYYY-MM-DD.json
 "dashboard_binding": "not_connected"
 ```
 
-Переход дашборда на чтение JSON является отдельной технической задачей после согласования схемы.
+Если дашборд уже читает JSON, но сохраняет явное предупреждение на случай ошибки загрузки, в snapshot должно стоять:
+
+```json
+"dashboard_binding": "connected_with_fallback"
+```
+
+Переход в режим `connected_required` возможен только после того, как дашборд стабильно работает от JSON и больше не нуждается в демонстрационном fallback.

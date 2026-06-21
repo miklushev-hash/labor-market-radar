@@ -311,8 +311,8 @@ radar_snapshot.json
 
 На текущем локальном этапе:
 
-1. `index.html` загружает `data/radar_snapshot.json` рядом с прототипом или рабочий файл из `data/current_radar`.
-2. Если загрузка не удалась, прототип показывает встроенный демонстрационный fallback.
+1. `index.html` загружает `../../data/current_radar/radar_snapshot.json`.
+2. Если загрузка не удалась, прототип показывает явное fallback-предупреждение, что актуальный snapshot недоступен.
 3. В интерфейсе явно отображается:
    - дата snapshot;
    - статус;
@@ -328,15 +328,15 @@ radar_snapshot.json
 
 ## Что меняется в прототипе
 
-Текущий прототип в `prototypes/labor-market-radar/index.html` пока содержит данные внутри HTML.
+Текущий прототип в `prototypes/labor-market-radar/index.html` уже читает `data/current_radar/radar_snapshot.json` через относительный путь `../../data/current_radar/radar_snapshot.json`.
 
-Следующий технический шаг:
+Текущий статус:
 
-1. создать `data/current_radar/radar_snapshot.json`;
-2. создать копию или ссылочный файл для прототипа: `prototypes/labor-market-radar/data/radar_snapshot.json`;
-3. заменить зашитый массив данных в HTML на загрузку JSON;
-4. оставить fallback для демонстрационного режима;
-5. добавить на экран дату и список выпусков-оснований.
+1. `data/current_radar/radar_snapshot.json` создан;
+2. зашитый массив данных в HTML удален;
+3. дашборд показывает дату snapshot, статус, методологию, индексы, сигналы, действия, ограничения и выпуски-основания;
+4. fallback сохранен только как явное предупреждение на случай ошибки загрузки JSON;
+5. `dashboard_binding` в snapshot должен быть `connected_with_fallback`.
 
 ## Проверки перед тем, как считать дашборд актуальным
 

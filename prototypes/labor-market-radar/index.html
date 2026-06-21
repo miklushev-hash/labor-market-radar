@@ -9,58 +9,59 @@
       --bg: #f6f7f3;
       --panel: #ffffff;
       --ink: #17211c;
-      --muted: #647067;
+      --muted: #637068;
       --line: #d9ded5;
       --green: #1f7a5a;
       --teal: #0f7f8c;
-      --red: #b4473f;
-      --amber: #bd7d22;
       --blue: #315f9f;
-      --shadow: 0 18px 44px rgba(37, 47, 42, .12);
+      --amber: #bd7d22;
+      --red: #b4473f;
+      --soft: #edf4ef;
+      --shadow: 0 18px 44px rgba(37, 47, 42, .10);
       font-family: Inter, "Segoe UI", Arial, sans-serif;
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       background: linear-gradient(180deg, #fff 0, var(--bg) 360px);
       color: var(--ink);
     }
 
-    button, select { font: inherit; }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
     .app {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 264px 1fr;
-      min-width: 0;
+      grid-template-columns: 280px minmax(0, 1fr);
     }
 
     aside {
-      border-right: 1px solid var(--line);
-      background: rgba(255,255,255,.72);
-      backdrop-filter: blur(18px);
-      padding: 22px 18px;
       position: sticky;
       top: 0;
       height: 100vh;
-      min-width: 0;
+      padding: 22px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, .76);
+      backdrop-filter: blur(18px);
     }
 
     .brand {
       display: flex;
-      align-items: center;
       gap: 12px;
+      align-items: center;
       margin-bottom: 28px;
     }
 
     .mark {
       width: 42px;
       height: 42px;
-      border-radius: 8px;
-      background: conic-gradient(from 180deg, var(--green), var(--teal), var(--blue), var(--green));
       display: grid;
       place-items: center;
+      border-radius: 8px;
+      background: var(--green);
       color: #fff;
       font-weight: 800;
     }
@@ -74,18 +75,20 @@
     }
 
     .nav button {
-      border: 1px solid transparent;
-      background: transparent;
-      text-align: left;
+      min-height: 40px;
       padding: 10px 12px;
+      border: 1px solid transparent;
       border-radius: 8px;
+      background: transparent;
       color: var(--muted);
+      text-align: left;
       cursor: pointer;
+      font: inherit;
     }
 
     .nav button.active {
-      background: #eef5ef;
       border-color: #cfe0d2;
+      background: #eef5ef;
       color: var(--ink);
       font-weight: 700;
     }
@@ -96,57 +99,69 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fbfcf9;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
     }
 
-    .side-block small {
+    .side-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 12px;
+    }
+
+    .status-pill {
+      width: fit-content;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f0f4f1;
       color: var(--muted);
-      display: block;
-      line-height: 1.45;
-      overflow-wrap: anywhere;
+    }
+
+    .status-pill.warning {
+      background: #fff5df;
+      color: var(--amber);
     }
 
     main {
-      padding: 24px;
       min-width: 0;
+      padding: 28px 24px 42px;
     }
 
     .topbar {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
-      gap: 18px;
+      gap: 20px;
+      align-items: flex-start;
       margin-bottom: 20px;
     }
 
     h1 {
-      margin: 0 0 6px;
+      margin: 0 0 8px;
+      max-width: 980px;
       font-size: 38px;
       line-height: 1.05;
       letter-spacing: 0;
     }
 
     .subtitle {
-      color: var(--muted);
-      max-width: 760px;
-      line-height: 1.45;
+      max-width: 860px;
       margin: 0;
-      overflow-wrap: anywhere;
+      color: var(--muted);
+      line-height: 1.48;
+      font-size: 17px;
     }
 
-    .controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    select, .chip {
+    .source {
+      min-width: 230px;
+      padding: 12px;
       border: 1px solid var(--line);
-      background: #fff;
       border-radius: 8px;
-      min-height: 38px;
-      padding: 8px 10px;
-      color: var(--ink);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
     }
 
     .grid {
@@ -156,42 +171,19 @@
     }
 
     .panel {
-      background: rgba(255,255,255,.86);
+      min-width: 0;
+      padding: 16px;
       border: 1px solid var(--line);
       border-radius: 8px;
+      background: rgba(255, 255, 255, .88);
       box-shadow: var(--shadow);
-      padding: 16px;
-      min-width: 0;
     }
 
     .span-3 { grid-column: span 3; }
     .span-4 { grid-column: span 4; }
     .span-5 { grid-column: span 5; }
     .span-7 { grid-column: span 7; }
-    .span-8 { grid-column: span 8; }
     .span-12 { grid-column: span 12; }
-
-    .metric-label {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-
-    .metric-value {
-      font-size: 30px;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .delta {
-      margin-top: 8px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .positive { color: var(--green); }
-    .negative { color: var(--red); }
-    .warning { color: var(--amber); }
 
     h2 {
       margin: 0 0 12px;
@@ -199,163 +191,129 @@
       letter-spacing: 0;
     }
 
-    .chart {
+    .metric-label {
+      min-height: 32px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .metric-value {
+      margin-top: 8px;
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .metric-caption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .metric-caption.high { color: var(--green); }
+    .metric-caption.medium { color: var(--amber); }
+    .metric-caption.low { color: var(--red); }
+
+    .bar-list {
       display: grid;
-      grid-template-columns: 84px 1fr 46px;
+      gap: 12px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 220px) 1fr 46px;
       gap: 10px;
       align-items: center;
+    }
+
+    .bar-row label {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .bar {
       height: 12px;
+      overflow: hidden;
       border-radius: 999px;
       background: #e7ece5;
-      overflow: hidden;
     }
 
     .bar span {
       display: block;
-      height: 100%;
       width: var(--w);
-      background: var(--c);
+      height: 100%;
       border-radius: inherit;
+      background: var(--c);
     }
 
-    .chart label, .chart b {
-      font-size: 13px;
+    .bar-row b {
       color: var(--muted);
+      font-size: 13px;
+      text-align: right;
     }
 
-    .signals {
+    .cards {
       display: grid;
       gap: 10px;
     }
 
-    .signal {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px;
-      background: #fff;
+    .card {
       display: grid;
       gap: 8px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
     }
 
-    .signal-head {
+    .card-head {
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 10px;
+      align-items: flex-start;
     }
 
-    .signal strong { font-size: 15px; }
+    .card strong { font-size: 15px; line-height: 1.3; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.45; font-size: 13px; }
 
     .badge {
-      border-radius: 999px;
+      flex: 0 0 auto;
+      max-width: 190px;
       padding: 4px 8px;
-      font-size: 12px;
-      white-space: nowrap;
+      border-radius: 999px;
       background: #eef3f0;
       color: var(--muted);
+      font-size: 12px;
+      white-space: normal;
+      text-align: center;
     }
 
-    .signal p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.42;
-      font-size: 13px;
-    }
-
-    .matrix {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(118px, 1fr));
-      gap: 8px;
-    }
-
-    .cell {
-      min-height: 112px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 10px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .cell b { font-size: 13px; }
-    .cell span { color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .badge.confirmed, .badge.high { background: #e8f3ed; color: var(--green); }
+    .badge.watch, .badge.medium { background: #fff5df; color: var(--amber); }
+    .badge.manual_check_required, .badge.low { background: #fbecea; color: var(--red); }
 
     .actions {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
-    }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(110px, 1fr));
-      gap: 8px;
-      align-items: stretch;
-    }
-
-    .flow-step {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      padding: 11px;
-      min-height: 108px;
-      display: grid;
-      gap: 8px;
-      align-content: start;
-    }
-
-    .flow-step small, .risk small {
-      color: var(--muted);
-      line-height: 1.35;
-    }
-
-    .risk-board {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(180px, 1fr));
-      gap: 10px;
-    }
-
-    .risk {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      padding: 12px;
-      display: grid;
-      gap: 7px;
-      min-height: 150px;
-    }
-
-    .risk strong {
-      font-size: 15px;
-    }
-
-    .score {
-      width: fit-content;
-      border: 1px solid #d5dfd7;
-      border-radius: 8px;
-      padding: 4px 7px;
-      background: #f4f8f5;
-      font-size: 12px;
-      color: var(--ink);
     }
 
     .action {
-      border-left: 4px solid var(--green);
-      background: #fff;
-      border-radius: 8px;
+      min-height: 148px;
       padding: 12px;
-      min-height: 126px;
+      border-left: 4px solid var(--green);
+      border-radius: 8px;
+      background: #fff;
     }
 
-    .action:nth-child(2) { border-color: var(--blue); }
-    .action:nth-child(3) { border-color: var(--amber); }
-    .action b { display: block; margin-bottom: 8px; }
+    .action:nth-child(2n) { border-color: var(--blue); }
+    .action:nth-child(3n) { border-color: var(--amber); }
+    .action b { display: block; margin-bottom: 8px; line-height: 1.3; }
     .action p { margin: 0; color: var(--muted); line-height: 1.42; font-size: 13px; }
+    .action small { display: block; margin-top: 10px; color: var(--muted); line-height: 1.35; }
 
     .table {
       width: 100%;
@@ -364,10 +322,11 @@
     }
 
     .table th, .table td {
-      text-align: left;
       padding: 10px 8px;
       border-bottom: 1px solid var(--line);
+      text-align: left;
       vertical-align: top;
+      line-height: 1.4;
     }
 
     .table th {
@@ -375,42 +334,41 @@
       font-weight: 700;
     }
 
+    .note {
+      padding: 12px;
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      background: #fffaf0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
     .hidden { display: none; }
 
-    @media (max-width: 980px) {
-      .app {
-        grid-template-columns: 1fr;
-        width: 100%;
-        overflow-x: hidden;
-      }
+    @media (max-width: 1080px) {
+      .app { grid-template-columns: 1fr; }
       aside {
         position: static;
         height: auto;
         border-right: 0;
         border-bottom: 1px solid var(--line);
       }
-      aside, main {
-        width: 100%;
-        max-width: 100vw;
-      }
-      .nav { grid-template-columns: repeat(3, 1fr); }
-      .topbar { flex-direction: column; }
-      .controls { justify-content: flex-start; }
-      .span-3, .span-4, .span-5, .span-7, .span-8 { grid-column: span 12; }
-      .matrix, .actions, .flow, .risk-board { grid-template-columns: 1fr; }
+      .nav { grid-template-columns: repeat(4, 1fr); }
+      .topbar { display: grid; }
+      .source { min-width: 0; }
+      .span-3, .span-4, .span-5, .span-7 { grid-column: span 12; }
+      .actions { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 620px) {
-      main { padding: 16px; }
-      aside { padding: 16px; }
-      .nav { grid-template-columns: 1fr; }
-      .chart { grid-template-columns: 76px 1fr 36px; }
-      select {
-        max-width: 100%;
-        min-width: 0;
-      }
+    @media (max-width: 680px) {
+      main, aside { padding: 16px; }
       h1 { font-size: 28px; }
-      .metric-value { font-size: 26px; }
+      .subtitle { font-size: 15px; }
+      .nav { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 1fr 1fr 38px; }
+      .card-head { display: grid; }
+      .badge { max-width: none; width: fit-content; }
     }
   </style>
 </head>
@@ -424,312 +382,324 @@
           <span>Оценка рынка труда</span>
         </div>
       </div>
+
       <nav class="nav" aria-label="Разделы">
         <button class="active" data-view="dashboard">Радар</button>
         <button data-view="signals">Сигналы</button>
-        <button data-view="company">Внутренний контур</button>
-        <button data-view="brief">Вывод</button>
+        <button data-view="actions">Действия</button>
+        <button data-view="basis">Основания</button>
       </nav>
+
       <div class="side-block">
-        <small>Локальный прототип целевого продукта. Внешний контур основан на логике обзоров, внутренний контур показан на демонстрационных агрегатах.</small>
+        Дашборд читает структурированный snapshot. Внутренний контур компании пока не подключен и отмечен как ограничение продукта.
+        <div class="side-meta">
+          <span class="status-pill" id="snapshotStatus">snapshot: загрузка</span>
+          <span class="status-pill warning" id="methodologyStatus">methodology: загрузка</span>
+          <span id="asOfDate">as of: ...</span>
+        </div>
       </div>
     </aside>
 
     <main>
       <section class="topbar">
         <div>
-          <h1>Радар рынка труда и внутренних рисков</h1>
-          <p class="subtitle">Прототип связывает внешний сигнал с практикой, критичной компетенцией и кадровым действием. Там, где основание еще требует эксперта, интерфейс показывает это прямо.</p>
+          <h1 id="pageTitle">Радар рынка труда и внутренних рисков</h1>
+          <p class="subtitle" id="shortAnswer">Загружаю snapshot...</p>
         </div>
-        <div class="controls">
-          <select id="period">
-            <option value="month">Апрель 2026</option>
-            <option value="quarter">Q1 2026</option>
-            <option value="year">2025 год</option>
-          </select>
-          <select id="mode">
-            <option value="radar">Общий радар</option>
-            <option value="pilot">Внутренний пилот</option>
-          </select>
-          <select id="practice">
-            <option value="all">Все практики</option>
-            <option value="onec">1С</option>
-            <option value="devops">DevOps / инфраструктура</option>
-            <option value="data">ИИ / данные</option>
-          </select>
+        <div class="source">
+          <strong>Источник данных</strong><br>
+          <span id="sourcePath">../../data/current_radar/radar_snapshot.json</span><br>
+          <span id="loadState">Загрузка...</span>
         </div>
       </section>
 
       <section id="dashboard" class="view grid">
         <article class="panel span-3">
-          <div class="metric-label">Индекс состояния рынка</div>
-          <div class="metric-value" id="marketIndex">62</div>
-          <div class="delta warning" id="marketDelta">Осторожный найм</div>
+          <div class="metric-label" id="metricLabel0">Индекс</div>
+          <div class="metric-value" id="metricScore0">...</div>
+          <div class="metric-caption" id="metricCaption0">...</div>
         </article>
         <article class="panel span-3">
-          <div class="metric-label">Сила зарплатного давления</div>
-          <div class="metric-value" id="salaryPressure">38</div>
-          <div class="delta" id="salaryDelta">Рост замедлился</div>
+          <div class="metric-label" id="metricLabel1">Индекс</div>
+          <div class="metric-value" id="metricScore1">...</div>
+          <div class="metric-caption" id="metricCaption1">...</div>
         </article>
         <article class="panel span-3">
-          <div class="metric-label">Внутренняя экспозиция</div>
-          <div class="metric-value" id="candidateCompetition">71</div>
-          <div class="delta negative" id="candidateDelta">Критичные роли затронуты</div>
+          <div class="metric-label" id="metricLabel2">Индекс</div>
+          <div class="metric-value" id="metricScore2">...</div>
+          <div class="metric-caption" id="metricCaption2">...</div>
         </article>
         <article class="panel span-3">
-          <div class="metric-label">Доказательность вывода</div>
-          <div class="metric-value" id="evidenceScore">84</div>
-          <div class="delta positive" id="evidenceDelta">Сильная база</div>
+          <div class="metric-label" id="metricLabel3">Индекс</div>
+          <div class="metric-value" id="metricScore3">...</div>
+          <div class="metric-caption" id="metricCaption3">...</div>
         </article>
 
         <article class="panel span-7">
-          <h2>Контуры влияния</h2>
-          <div class="chart">
-            <label>Макро</label><div class="bar"><span style="--w:82%;--c:var(--blue)"></span></div><b>82</b>
-            <label>Работодатели</label><div class="bar"><span style="--w:76%;--c:var(--teal)"></span></div><b>76</b>
-            <label>Вакансии</label><div class="bar"><span style="--w:68%;--c:var(--green)"></span></div><b>68</b>
-            <label>Зарплаты</label><div class="bar"><span style="--w:42%;--c:var(--amber)"></span></div><b>42</b>
-            <label>ИИ-сдвиги</label><div class="bar"><span style="--w:73%;--c:var(--red)"></span></div><b>73</b>
-          </div>
+          <h2>Индексы snapshot</h2>
+          <div class="bar-list" id="indexBars"></div>
         </article>
 
         <article class="panel span-5">
-          <h2>Главный вывод</h2>
-          <div class="signals">
-            <div class="signal">
-              <div class="signal-head">
-                <strong>Рынок охладился без системного кризиса</strong>
-                <span class="badge">устойчивый тренд</span>
+          <h2>Текущий режим</h2>
+          <div class="cards">
+            <div class="card">
+              <div class="card-head">
+                <strong id="marketModeLabel">...</strong>
+                <span class="badge" id="dashboardBinding">...</span>
               </div>
-              <p>Работодатели переходят от расширения штата к точечному найму, контролю ФОТ и повышению требований к прикладной отдаче роли.</p>
+              <p id="marketModeText">...</p>
             </div>
-            <div class="signal">
-              <div class="signal-head">
-                <strong>Сегментация ИТ-ролей усилилась</strong>
-                <span class="badge">сильный сигнал</span>
-              </div>
-              <p>Начинающим стало сложнее, а сильные middle/senior специалисты и роли с ИИ/данными остаются ценными.</p>
-            </div>
+            <div class="note" id="technicalNote"></div>
           </div>
         </article>
 
         <article class="panel span-12">
-          <h2>Путь от сигнала к решению</h2>
-          <div class="flow" id="decisionFlow"></div>
-        </article>
-
-        <article class="panel span-12">
-          <h2>Рекомендации для работодателя</h2>
-          <div class="actions">
-            <div class="action">
-              <b>Найм</b>
-              <p>Ускорять закрытие критичных middle/senior ролей, но не расширять штат “на вырост” без понятной экономики позиции.</p>
-            </div>
-            <div class="action">
-              <b>Удержание</b>
-              <p>Фокусировать удержание на ролях с прямой проектной отдачей, редкими компетенциями и высоким риском замены.</p>
-            </div>
-            <div class="action">
-              <b>Компенсации</b>
-              <p>Переходить от фронтальной индексации к точечной настройке вилок, льгот и бонусов по группам риска.</p>
-            </div>
-          </div>
+          <h2>Главные сигналы</h2>
+          <div class="cards" id="topSignals"></div>
         </article>
       </section>
 
       <section id="signals" class="view grid hidden">
         <article class="panel span-12">
           <h2>Матрица сигналов</h2>
-          <div class="matrix">
-            <div class="cell"><b>Мировой контур</b><span>ИИ, ставки, технологические инвестиции и давление на эффективность.</span><span class="badge">73</span></div>
-            <div class="cell"><b>Экономика РФ</b><span>Дорогие деньги повышают цену ошибки найма и избыточного штата.</span><span class="badge">82</span></div>
-            <div class="cell"><b>Рынок труда</b><span>Дефицит становится структурным: важнее качество профиля.</span><span class="badge">76</span></div>
-            <div class="cell"><b>ИТ-рынок</b><span>Спрос смещается к прикладным ролям с быстрой отдачей.</span><span class="badge">68</span></div>
-            <div class="cell"><b>Внутренний контур</b><span>Экспозиция зависит от практики, критичности роли и сложности замены.</span><span class="badge">79</span></div>
-          </div>
-        </article>
-        <article class="panel span-12">
-          <h2>Проверенные сигналы</h2>
           <table class="table">
             <thead>
-              <tr><th>Сигнал</th><th>Тип</th><th>Доказательность</th><th>Вывод</th></tr>
+              <tr>
+                <th>Сигнал</th>
+                <th>Статус</th>
+                <th>Сила</th>
+                <th>Что означает сейчас</th>
+                <th>Основание</th>
+              </tr>
             </thead>
-            <tbody id="signalRows"></tbody>
+            <tbody id="signalsTable"></tbody>
           </table>
         </article>
       </section>
 
-      <section id="company" class="view grid hidden">
+      <section id="actions" class="view grid hidden">
         <article class="panel span-12">
-          <h2>Риски по практикам и компетенциям</h2>
-          <div class="risk-board" id="riskBoard"></div>
+          <h2>Рекомендуемые действия</h2>
+          <div class="actions" id="actionsList"></div>
         </article>
-        <article class="panel span-7">
-          <h2>Что подключается в промышленном режиме</h2>
-          <table class="table">
-            <thead>
-              <tr><th>Внутренний объект</th><th>Нужный агрегат</th><th>Зачем</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Практика</td><td>проектная критичность и дефицит ролей</td><td>понять экспозицию к сигналу</td></tr>
-              <tr><td>Компетенция</td><td>редкость, заместимость, план развития</td><td>развести найм и развитие</td></tr>
-              <tr><td>Роль</td><td>сложность закрытия и риск удержания</td><td>выбрать действие для HR и бизнеса</td></tr>
-            </tbody>
-          </table>
-        </article>
-        <article class="panel span-5">
-          <h2>Ограничение пилота</h2>
-          <div class="signals">
-            <div class="signal">
-              <p>Здесь нет реальных персональных HR-данных. Прототип проверяет логику связки внешнего рынка и внутреннего контура на демонстрационных агрегатах.</p>
-            </div>
-          </div>
+        <article class="panel span-12">
+          <h2>Ограничения и ручные проверки</h2>
+          <div class="cards" id="limitationsList"></div>
         </article>
       </section>
 
-      <section id="brief" class="view grid hidden">
-        <article class="panel span-8">
-          <h2>Executive summary</h2>
-          <div class="signals">
-            <div class="signal">
-              <p id="summaryText">2025 год закрепил переход рынка труда ИТ от перегрева к осторожному и выборочному найму. Работодателю важно не останавливать критичный найм, но жестче связывать каждую роль с бизнес-эффектом, проектной загрузкой и риском потери компетенции.</p>
-            </div>
-          </div>
-        </article>
-        <article class="panel span-4">
-          <h2>Следующий контур</h2>
-          <div class="signals">
-            <div class="signal"><p>Промышленный запуск добавляет рабочую панель аналитика, версионирование оснований, согласованный внутренний словарь и доступы по ролям.</p></div>
-          </div>
+      <section id="basis" class="view grid hidden">
+        <article class="panel span-12">
+          <h2>Выпуски-основания</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Период</th>
+                <th>Тип</th>
+                <th>Файл</th>
+                <th>Роль в snapshot</th>
+              </tr>
+            </thead>
+            <tbody id="basisTable"></tbody>
+          </table>
         </article>
       </section>
     </main>
   </div>
 
   <script>
-    const data = {
-      all: {
-        marketIndex: 62, salaryPressure: 38, candidateCompetition: 71, evidenceScore: 84,
-        marketDelta: "Осторожный найм", salaryDelta: "Рост замедлился", candidateDelta: "Несколько практик затронуты", evidenceDelta: "Сильная база",
-        rows: [
-          ["Охлаждение рынка без системного кризиса", "устойчивый тренд", "высокая", "Нанимать точнее, не шире"],
-          ["Сегментация ИТ-ролей", "структурный сдвиг", "высокая", "Разделить политику по уровням"],
-          ["Рост роли ИИ и данных", "стратегический сигнал", "средняя+", "Усилить развитие прикладных компетенций"]
-        ],
-        flow: [
-          ["Внешний сигнал", "Спрос смещается к прикладной отдаче роли."],
-          ["Компетенции", "1С, инфраструктура, данные и проектная аналитика."],
-          ["Внутренняя экспозиция", "Риски различаются по практике и заместимости."],
-          ["Действие", "Развести критичный найм, удержание и развитие."],
-          ["Контроль", "Каждый вывод держать на проверенных основаниях."]
-        ],
-        risks: [
-          ["1С", "Архитекторы и ведущие аналитики", "78", "держать точечный найм и внутренний резерв"],
-          ["DevOps / инфраструктура", "Отказоустойчивость и платформенная экспертиза", "84", "сверить удержание критичных специалистов"],
-          ["ИИ / данные", "Прикладное внедрение ИИ", "69", "развивать компетенции до масштабного найма"]
-        ]
+    const SNAPSHOT_URL = "../../data/current_radar/radar_snapshot.json";
+
+    const fallbackSnapshot = {
+      schema_version: "fallback",
+      snapshot_id: "fallback_not_loaded",
+      as_of_date: "unknown",
+      status: "draft",
+      methodology_status: "expert_pilot",
+      dashboard_binding: "not_connected",
+      market_mode: {
+        label: "Snapshot не загружен"
       },
-      onec: {
-        marketIndex: 67, salaryPressure: 46, candidateCompetition: 78, evidenceScore: 81,
-        marketDelta: "Найм остается точечным", salaryDelta: "Давление по редким профилям", candidateDelta: "Высокая зависимость от лидов", evidenceDelta: "Нужна экспертная валидация",
-        rows: [
-          ["Сложность замены ведущих специалистов", "внутренняя экспозиция", "пилот", "Проверить резерв по ключевым проектам"],
-          ["Прикладной опыт важнее общего потока кандидатов", "рыночный сигнал", "средняя+", "Держать профильный скрининг"],
-          ["Развитие аналитиков снижает узкое место", "рекомендация", "гипотеза", "Валидировать с руководителем практики"]
-        ],
-        flow: [
-          ["Рынок", "Избирательный спрос сохраняет цену прикладного опыта."],
-          ["Роль", "Ведущий аналитик и архитектор 1С."],
-          ["Риск", "Проект зависит от редкой связки домена и платформы."],
-          ["Действие", "Сверить резерв, найм и план развития."],
-          ["Владелец", "HRBP и руководитель практики подтверждают вывод."]
-        ],
-        risks: [
-          ["Проектный узел", "Архитектор 1С", "86", "риск замены высокий"],
-          ["Компетенция", "Интеграции и предметная аналитика", "74", "развитие внутри полезнее широкого поиска"],
-          ["Проверка", "Внутренний спрос", "ручная", "нужен агрегат по загрузке и вакансиям"]
-        ]
-      },
-      devops: {
-        marketIndex: 73, salaryPressure: 54, candidateCompetition: 84, evidenceScore: 85,
-        marketDelta: "Критичный найм не останавливать", salaryDelta: "Точечное давление", candidateDelta: "Экспозиция высокая", evidenceDelta: "Сильный внешний контур",
-        rows: [
-          ["Платформенная надежность остается критичной", "структурный сигнал", "высокая", "Не откладывать ключевые закрытия"],
-          ["Высокая цена ухода эксперта", "внутренний риск", "пилот", "Развести удержание и резервирование знаний"],
-          ["Автоматизация меняет профиль роли", "стратегический сигнал", "средняя+", "Развивать инструменты и SRE-практики"]
-        ],
-        flow: [
-          ["Сигнал", "Эффективность и автоматизация меняют ожидания к роли."],
-          ["Компетенция", "DevOps, SRE, инфраструктура и безопасность."],
-          ["Экспозиция", "Проектная непрерывность зависит от малой группы людей."],
-          ["Действие", "Удержание плюс передача знаний."],
-          ["Проверка", "Сопоставить с загрузкой и очередью вакансий."]
-        ],
-        risks: [
-          ["Удержание", "SRE и платформенные инженеры", "88", "требует разговора с владельцем практики"],
-          ["Найм", "Инфраструктурные лиды", "81", "держать приоритет у критичных ролей"],
-          ["Развитие", "Автоматизация эксплуатации", "72", "включить в план upskill"]
-        ]
-      },
-      data: {
-        marketIndex: 76, salaryPressure: 49, candidateCompetition: 69, evidenceScore: 77,
-        marketDelta: "Спрос растет выборочно", salaryDelta: "Цена ошибки высока", candidateDelta: "Экспозиция растет", evidenceDelta: "Сигнал требует проверки",
-        rows: [
-          ["ИИ создает новые ожидания к отдаче роли", "стратегический сигнал", "средняя+", "Не путать хайп с проектной потребностью"],
-          ["Данные важны там, где есть внедрение", "рыночный фильтр", "средняя", "Сверить use cases бизнеса"],
-          ["Внутреннее развитие снижает риск модного найма", "рекомендация", "гипотеза", "Пилотировать на прикладных задачах"]
-        ],
-        flow: [
-          ["Сигнал", "ИИ влияет на спрос и на перераспределение задач."],
-          ["Компетенция", "ML, аналитика данных, внедрение ИИ."],
-          ["Риск", "Модный найм без проектной экономики."],
-          ["Действие", "Развести эксперименты, upskill и критичный найм."],
-          ["Контроль", "Подтвердить спрос внутренним портфелем задач."]
-        ],
-        risks: [
-          ["Спрос", "Прикладные ИИ-сценарии", "76", "подтвердить владельцами задач"],
-          ["Компетенция", "Data engineering", "71", "сверить внутренний резерв"],
-          ["Шум", "Найм ради тренда", "64", "не переводить сигнал в оффер без кейса"]
-        ]
-      }
+      short_answer: "Не удалось загрузить radar_snapshot.json. Проверьте путь к файлу и публикацию GitHub Pages.",
+      indexes: [],
+      signals: [],
+      actions: [],
+      limitations: [
+        {
+          id: "snapshot_load_error",
+          level: "technical",
+          text: "Дашборд не получил данные из radar_snapshot.json и не должен использоваться как актуальная картина.",
+          manual_check_required: true
+        }
+      ],
+      basis: []
     };
 
-    const views = document.querySelectorAll(".view");
+    const colors = ["var(--green)", "var(--teal)", "var(--blue)", "var(--amber)", "var(--red)"];
+
     document.querySelectorAll(".nav button").forEach(button => {
       button.addEventListener("click", () => {
         document.querySelectorAll(".nav button").forEach(item => item.classList.remove("active"));
         button.classList.add("active");
-        views.forEach(view => view.classList.toggle("hidden", view.id !== button.dataset.view));
+        document.querySelectorAll(".view").forEach(view => {
+          view.classList.toggle("hidden", view.id !== button.dataset.view);
+        });
       });
     });
 
-    function render() {
-      const practice = document.getElementById("practice").value;
-      const mode = document.getElementById("mode").value;
-      const current = data[practice];
-      for (const key of ["marketIndex", "salaryPressure", "candidateCompetition", "evidenceScore"]) {
-        document.getElementById(key).textContent = current[key];
-      }
-      document.getElementById("marketDelta").textContent = current.marketDelta;
-      document.getElementById("salaryDelta").textContent = current.salaryDelta;
-      document.getElementById("candidateDelta").textContent = current.candidateDelta;
-      document.getElementById("evidenceDelta").textContent = current.evidenceDelta;
-      document.getElementById("signalRows").innerHTML = current.rows.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td></tr>`).join("");
-      document.getElementById("decisionFlow").innerHTML = current.flow.map(step => `<div class="flow-step"><b>${step[0]}</b><small>${step[1]}</small></div>`).join("");
-      document.getElementById("riskBoard").innerHTML = current.risks.map(risk => `<div class="risk"><strong>${risk[0]}</strong><span>${risk[1]}</span><span class="score">Приоритет: ${risk[2]}</span><small>${risk[3]}</small></div>`).join("");
-      document.body.dataset.mode = mode;
-      document.getElementById("summaryText").textContent = mode === "pilot"
-        ? "Внутренний пилот показывает, какие внешние сигналы действительно касаются выбранной практики. Следующий шаг для вывода - подтвердить экспозицию агрегатами по ролям, загрузке, сложности найма и риску удержания."
-        : "Радар сначала отделяет подтвержденные внешние сигналы от шума. Затем он связывает их с компетенциями и показывает, где работодателю нужен найм, удержание, развитие или спокойное наблюдение.";
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
 
-    document.getElementById("practice").addEventListener("change", render);
-    document.getElementById("mode").addEventListener("change", render);
-    document.getElementById("period").addEventListener("change", event => {
-      const label = event.target.options[event.target.selectedIndex].text;
-      document.getElementById("summaryText").textContent = `${label}: период задает горизонт сигнала. Чем длиннее формат, тем строже подтверждение перед тем, как внешний рынок превращается во внутреннюю рекомендацию.`;
-    });
-    render();
+    function statusText(value) {
+      const map = {
+        pilot: "пилот",
+        draft: "черновик",
+        approved: "утверждено",
+        archived: "архив",
+        expert_pilot: "экспертная методология",
+        partially_validated: "частично подтверждена",
+        mathematically_validated: "математически подтверждена",
+        not_connected: "JSON не подключен",
+        connected_with_fallback: "JSON + fallback",
+        connected_required: "только JSON",
+        confirmed: "подтвержден",
+        supported: "поддержан",
+        watch: "наблюдение",
+        manual_check_required: "ручная проверка",
+        high: "высокая",
+        medium: "средняя",
+        low: "низкая"
+      };
+      return map[value] || value || "не указано";
+    }
+
+    function confidenceClass(value) {
+      if (value === "high" || value === "confirmed") return "high";
+      if (value === "low" || value === "manual_check_required") return "low";
+      return "medium";
+    }
+
+    function renderMetrics(indexes) {
+      for (let i = 0; i < 4; i += 1) {
+        const index = indexes[i];
+        document.getElementById(`metricLabel${i}`).textContent = index ? index.name : "Индекс";
+        document.getElementById(`metricScore${i}`).textContent = index ? index.score : "n/a";
+        const caption = document.getElementById(`metricCaption${i}`);
+        caption.textContent = index ? index.label : "Нет данных в snapshot";
+        caption.className = `metric-caption ${confidenceClass(index?.confidence)}`;
+      }
+
+      document.getElementById("indexBars").innerHTML = indexes.map((index, itemIndex) => `
+        <div class="bar-row">
+          <label>${escapeHtml(index.name)}<br><small>${escapeHtml(index.label)}</small></label>
+          <div class="bar"><span style="--w:${Number(index.score) || 0}%;--c:${colors[itemIndex % colors.length]}"></span></div>
+          <b>${escapeHtml(index.score)}</b>
+        </div>
+      `).join("");
+    }
+
+    function renderSignals(signals) {
+      const visibleSignals = signals.slice(0, 3);
+      document.getElementById("topSignals").innerHTML = visibleSignals.map(signal => `
+        <div class="card">
+          <div class="card-head">
+            <strong>${escapeHtml(signal.name)}</strong>
+            <span class="badge ${escapeHtml(signal.status)}">${escapeHtml(statusText(signal.status))}</span>
+          </div>
+          <p>${escapeHtml(signal.meaning_now)}</p>
+          <p><strong>Основание:</strong> ${escapeHtml(signal.evidence)}</p>
+        </div>
+      `).join("");
+
+      document.getElementById("signalsTable").innerHTML = signals.map(signal => `
+        <tr>
+          <td>${escapeHtml(signal.name)}</td>
+          <td><span class="badge ${escapeHtml(signal.status)}">${escapeHtml(statusText(signal.status))}</span></td>
+          <td>${escapeHtml(statusText(signal.strength))}</td>
+          <td>${escapeHtml(signal.meaning_now)}</td>
+          <td>${escapeHtml(signal.evidence)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderActions(actions) {
+      document.getElementById("actionsList").innerHTML = actions.map(action => `
+        <div class="action">
+          <b>${escapeHtml(action.title)}</b>
+          <p>${escapeHtml(action.rationale)}</p>
+          <small><strong>Срочность:</strong> ${escapeHtml(statusText(action.urgency))}<br><strong>Владелец:</strong> ${escapeHtml(action.owner)}</small>
+        </div>
+      `).join("");
+    }
+
+    function renderLimitations(limitations) {
+      document.getElementById("limitationsList").innerHTML = limitations.map(item => `
+        <div class="card">
+          <div class="card-head">
+            <strong>${escapeHtml(item.level)}</strong>
+            <span class="badge ${item.manual_check_required ? "manual_check_required" : ""}">${item.manual_check_required ? "ручная проверка" : "зафиксировано"}</span>
+          </div>
+          <p>${escapeHtml(item.text)}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderBasis(basis) {
+      document.getElementById("basisTable").innerHTML = basis.map(item => `
+        <tr>
+          <td>${escapeHtml(item.period)}</td>
+          <td>${escapeHtml(item.type)}</td>
+          <td><a href="../../${encodeURI(item.path)}">${escapeHtml(item.path)}</a></td>
+          <td>${escapeHtml(item.role)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderSnapshot(snapshot, loadedFromJson) {
+      document.getElementById("pageTitle").textContent = snapshot.market_mode?.label || "Labor Market Radar";
+      document.getElementById("shortAnswer").textContent = snapshot.short_answer || "Нет краткого вывода в snapshot.";
+      document.getElementById("snapshotStatus").textContent = `snapshot: ${statusText(snapshot.status)}`;
+      document.getElementById("methodologyStatus").textContent = `methodology: ${statusText(snapshot.methodology_status)}`;
+      document.getElementById("asOfDate").textContent = `as of: ${snapshot.as_of_date || "не указано"}`;
+      document.getElementById("dashboardBinding").textContent = statusText(snapshot.dashboard_binding);
+      document.getElementById("marketModeLabel").textContent = snapshot.market_mode?.label || "Режим не указан";
+      document.getElementById("marketModeText").textContent = snapshot.short_answer || "";
+      document.getElementById("loadState").textContent = loadedFromJson
+        ? `Загружен snapshot ${snapshot.snapshot_id}`
+        : "Внимание: используется fallback, snapshot не загружен";
+      document.getElementById("technicalNote").textContent = loadedFromJson
+        ? "Это уже интерфейс поверх snapshot. Если обновить radar_snapshot.json, дашборд покажет новую картину после публикации файла."
+        : "Данные не загружены из JSON. Эта страница не должна использоваться как актуальный радар до устранения ошибки загрузки.";
+
+      renderMetrics(snapshot.indexes || []);
+      renderSignals(snapshot.signals || []);
+      renderActions(snapshot.actions || []);
+      renderLimitations(snapshot.limitations || []);
+      renderBasis(snapshot.basis || []);
+    }
+
+    async function loadSnapshot() {
+      try {
+        const response = await fetch(SNAPSHOT_URL, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const snapshot = await response.json();
+        renderSnapshot(snapshot, true);
+      } catch (error) {
+        console.error("Не удалось загрузить radar_snapshot.json", error);
+        renderSnapshot(fallbackSnapshot, false);
+      }
+    }
+
+    loadSnapshot();
   </script>
 </body>
 </html>
