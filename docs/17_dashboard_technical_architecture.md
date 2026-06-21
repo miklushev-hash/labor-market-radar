@@ -167,11 +167,15 @@ radar_snapshot.json
 
 Правила извлечения структурированного слоя из готовых выпусков описаны в документе:
 
-- [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/18_snapshot_extraction_rules.md)
+- [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/18_snapshot_extraction_rules.md)
 
 Методика расчета индексов описана в документе:
 
-- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/19_index_methodology.md)
+- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/19_index_methodology.md)
+
+Точная схема `radar_snapshot.json`, обязательные поля и допустимые значения описаны в документе:
+
+- [20_radar_snapshot_schema.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/20_radar_snapshot_schema.md)
 
 ```json
 {

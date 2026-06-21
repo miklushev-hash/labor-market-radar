@@ -62,10 +62,11 @@
 
 - [17_dashboard_technical_architecture.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/17_dashboard_technical_architecture.md)
 
-Правила извлечения структурированного слоя и методика индексов описаны отдельно:
+Правила извлечения структурированного слоя, методика индексов и схема snapshot описаны отдельно:
 
-- [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/18_snapshot_extraction_rules.md)
-- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/19_index_methodology.md)
+- [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/18_snapshot_extraction_rules.md)
+- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/19_index_methodology.md)
+- [20_radar_snapshot_schema.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/20_radar_snapshot_schema.md)
 
 Рабочие исходные материалы, которые нужны для продукта, но не должны мешать в корне, лежат в папке `source`. К ним относятся рабочая сборка продукта, теоретические материалы и вспомогательные сценарии.
 

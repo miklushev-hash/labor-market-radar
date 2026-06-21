@@ -134,7 +134,8 @@
 
 Подробная методика шкал и выбора баллов ведется в документе:
 
-- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/19_index_methodology.md)
+- [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/19_index_methodology.md)
+- [20_radar_snapshot_schema.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/20_radar_snapshot_schema.md)
 
 Для каждого индекса нужно указать:
 

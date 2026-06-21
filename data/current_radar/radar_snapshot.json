@@ -1,0 +1,234 @@
+{
+  "schema_version": "1.0",
+  "snapshot_id": "radar_2026-05-25_pilot",
+  "as_of_date": "2026-05-25",
+  "created_at": "2026-06-21",
+  "status": "pilot",
+  "methodology_status": "expert_pilot",
+  "dashboard_binding": "not_connected",
+  "market_mode": {
+    "id": "cautious_employer_market_targeted_it_deficit",
+    "label": "Осторожный рынок работодателя с точечным дефицитом сильных ИТ-ролей"
+  },
+  "short_answer": "На 25.05.2026 рынок труда ИТ в России не выглядит как новый перегрев. Работодателю стало легче выбирать в широком потоке кандидатов, но критичные middle/senior, ИБ, инфраструктурные, data/AI и прикладные роли остаются сложными. Управленческая позиция: нанимать точнее, удерживать критичное, развивать прикладные компетенции и не принимать решений по слабым сигналам без проверки.",
+  "basis": [
+    {
+      "id": "annual_2025",
+      "type": "annual_digest",
+      "period": "2025",
+      "path": "data/2025/annual_digest.md",
+      "role": "Годовой фон: переход от фронтального перегрева к точечному найму и структурному дефициту."
+    },
+    {
+      "id": "quarter_2026_q1",
+      "type": "quarterly_digest",
+      "period": "2026-Q1",
+      "path": "data/2026-Q1/quarterly_digest.md",
+      "role": "Квартальная траектория: закрепление более выборочной и работодателецентричной логики."
+    },
+    {
+      "id": "month_2026_04",
+      "type": "monthly_digest",
+      "period": "2026-04",
+      "path": "data/2026-04/monthly_digest.md",
+      "role": "Последнее плотное подтвержденное движение: снижение доли компаний с кадровым дефицитом, ИТ hh-индекс 19,6, ставка 14,5%, безработица 2,1%."
+    },
+    {
+      "id": "week_2026_05_01_2026_05_14",
+      "type": "weekly_digest",
+      "period": "2026-05-01_2026-05-14",
+      "path": "data/2026-05-01_2026-05-14/weekly_digest_multilayer.md",
+      "role": "Свежий узкий сигнал: ИТ hh-индекс 22,9, нехватка ИБ-кадров у 71% опрошенных компаний, внешний сигнал ИИ/эффективности."
+    },
+    {
+      "id": "current_radar_2026_05_25",
+      "type": "current_situation_radar",
+      "period": "as_of_2026-05-25",
+      "path": "data/current_radar/current_situation_radar.md",
+      "role": "Утвержденная управленческая сборка текущей ситуации по готовым выпускам."
+    }
+  ],
+  "indexes": [
+    {
+      "id": "market_state",
+      "name": "Индекс состояния рынка",
+      "score": 57,
+      "label": "Смешанный рынок со сдвигом к работодателю",
+      "method": "expert_assessment",
+      "explanation": "Рынок охладился и стал более выборочным, но спрос не обвалился, а точечный дефицит сильных ИТ-ролей сохраняется.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "week_2026_05_01_2026_05_14", "current_radar_2026_05_25"],
+      "confidence": "medium",
+      "manual_check_required": false
+    },
+    {
+      "id": "hiring_tension",
+      "name": "Индекс напряженности найма",
+      "score": 64,
+      "label": "Высокая сложность по критичным ролям",
+      "method": "expert_assessment",
+      "explanation": "Широкий поток кандидатов не снимает сложность закрытия критичных middle/senior, ИБ, инфраструктурных и узких прикладных ролей.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "week_2026_05_01_2026_05_14", "current_radar_2026_05_25"],
+      "confidence": "medium",
+      "manual_check_required": false
+    },
+    {
+      "id": "salary_pressure",
+      "name": "Индекс зарплатного давления",
+      "score": 39,
+      "label": "Точечное давление без фронтальной гонки",
+      "method": "expert_assessment",
+      "explanation": "Массовый рост зарплат не подтвержден, но по дефицитным ролям и удержанию критичных компетенций сохраняется адресное давление.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "current_radar_2026_05_25"],
+      "confidence": "medium",
+      "manual_check_required": false
+    },
+    {
+      "id": "candidate_competition",
+      "name": "Индекс конкуренции кандидатов",
+      "score": 72,
+      "label": "Высокая конкуренция кандидатов",
+      "method": "expert_assessment",
+      "explanation": "Вакансий стало меньше, резюме больше, hh-индекс по ИТ высокий; особенно сложнее junior и кандидатам без сильного прикладного профиля.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "week_2026_05_01_2026_05_14", "current_radar_2026_05_25"],
+      "confidence": "medium",
+      "manual_check_required": false
+    },
+    {
+      "id": "strategic_risk",
+      "name": "Индекс стратегического риска",
+      "score": 62,
+      "label": "Заметный стратегический риск",
+      "method": "expert_assessment",
+      "explanation": "ИИ, эффективность, дорогая ошибка найма и структурный дефицит меняют требования к ролям, но пока не дают основания для вывода о массовом замещении ИТ-ролей в России.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "week_2026_05_01_2026_05_14", "current_radar_2026_05_25"],
+      "confidence": "medium",
+      "manual_check_required": false
+    }
+  ],
+  "signals": [
+    {
+      "id": "shift_to_targeted_hiring",
+      "name": "Переход от фронтального перегрева к точечному найму",
+      "status": "confirmed",
+      "strength": "strong",
+      "meaning_now": "Расширять штат на вырост рискованно; найм должен быть связан с экономикой роли и проекта.",
+      "evidence": "Сигнал повторяется в годовом, квартальном и месячном слоях.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "current_radar_2026_05_25"],
+      "manual_check_required": false
+    },
+    {
+      "id": "structural_skill_deficit",
+      "name": "Структурный дефицит компетенций вместо универсального дефицита людей",
+      "status": "confirmed",
+      "strength": "strong",
+      "meaning_now": "Нельзя переносить ощущение большего потока кандидатов на все роли; критичные компетенции нужно защищать отдельно.",
+      "evidence": "Годовой и квартальный выводы поддержаны майским сигналом о нехватке ИБ-кадров.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "week_2026_05_01_2026_05_14", "current_radar_2026_05_25"],
+      "manual_check_required": false
+    },
+    {
+      "id": "candidate_competition_growth",
+      "name": "Рост конкуренции среди кандидатов",
+      "status": "confirmed",
+      "strength": "strong",
+      "meaning_now": "Можно усиливать качество отбора, но нельзя считать сильные прикладные роли легкозаменяемыми.",
+      "evidence": "Апрельский hh/stats слой и майский hh-индекс подтверждают рост конкуренции.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "week_2026_05_01_2026_05_14"],
+      "manual_check_required": false
+    },
+    {
+      "id": "ai_efficiency_role_pressure",
+      "name": "ИИ и эффективность как давление на ценность роли",
+      "status": "watch",
+      "strength": "medium",
+      "meaning_now": "Роли будут оцениваться строже по прикладному результату; часть стартовых задач может автоматизироваться.",
+      "evidence": "Сигнал повторяется в нескольких слоях, но не подтверждает немедленное массовое замещение в России.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "week_2026_05_01_2026_05_14"],
+      "manual_check_required": false
+    },
+    {
+      "id": "strategic_companies_signal",
+      "name": "Компании стратегического наблюдения как отдельный драйвер текущей картины",
+      "status": "manual_check_required",
+      "strength": "weak",
+      "meaning_now": "Клиентский контур важен, но текущей базы недостаточно для жесткого вывода по отдельным компаниям.",
+      "evidence": "Апрельский корпус прямо фиксирует недостаточность базы по отдельным компаниям.",
+      "basis_refs": ["month_2026_04", "current_radar_2026_05_25"],
+      "manual_check_required": true
+    }
+  ],
+  "actions": [
+    {
+      "id": "segment_roles",
+      "title": "Разделить роли на массовые, критичные и дефицитные",
+      "urgency": "high",
+      "owner": "HRBP, рекрутинг, руководители практик",
+      "rationale": "Текущая картина неоднородна: широкий ИТ-контур стал конкурентнее для кандидатов, но критичные компетенции остаются сложными.",
+      "basis_refs": ["current_radar_2026_05_25"]
+    },
+    {
+      "id": "review_growth_hiring",
+      "title": "Пересмотреть найм на вырост",
+      "urgency": "high",
+      "owner": "руководители практик, ресурсные менеджеры",
+      "rationale": "Все слои показывают переход к точечному найму и более строгой экономике роли.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "current_radar_2026_05_25"]
+    },
+    {
+      "id": "critical_retention_list",
+      "title": "Сформировать список ролей для адресного удержания",
+      "urgency": "high",
+      "owner": "HRD, HRBP, руководители направлений",
+      "rationale": "Дефицит смещен к качеству, прикладной отдаче и редким компетенциям.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "week_2026_05_01_2026_05_14"]
+    },
+    {
+      "id": "targeted_compensation_review",
+      "title": "Проверить компенсационные вилки по группам риска",
+      "urgency": "medium",
+      "owner": "C&B, HRBP",
+      "rationale": "Фронтальная зарплатная гонка не подтверждается, но точечное давление по дефицитным ролям сохраняется.",
+      "basis_refs": ["annual_2025", "month_2026_04", "current_radar_2026_05_25"]
+    },
+    {
+      "id": "monitor_ai_impact",
+      "title": "Отдельно наблюдать влияние ИИ на junior и стартовые задачи",
+      "urgency": "medium",
+      "owner": "HR, руководители практик, обучение и развитие",
+      "rationale": "ИИ-сигнал пока стратегический, но повторяется в годовом, квартальном, месячном и недельном слоях.",
+      "basis_refs": ["annual_2025", "quarter_2026_q1", "month_2026_04", "week_2026_05_01_2026_05_14"]
+    }
+  ],
+  "limitations": [
+    {
+      "id": "expert_methodology",
+      "level": "methodology",
+      "text": "Индексы являются экспертной оценкой, а не математически подтвержденной моделью.",
+      "manual_check_required": false
+    },
+    {
+      "id": "fresh_data_after_2026_05_14",
+      "level": "data",
+      "text": "Данные после 14.05.2026 требуют отдельной проверки перед обновлением snapshot.",
+      "manual_check_required": true
+    },
+    {
+      "id": "internal_contour_missing",
+      "level": "product",
+      "text": "Внутренний контур компании пока не подключен; выводы по удержанию, срокам закрытия ролей и внутренней экспозиции требуют HRD-согласования и внутренних агрегатов.",
+      "manual_check_required": true
+    },
+    {
+      "id": "dashboard_not_connected",
+      "level": "technical",
+      "text": "Публичный дашборд пока использует зашитый демонстрационный массив и не читает этот radar_snapshot.json автоматически.",
+      "manual_check_required": false
+    }
+  ],
+  "updated_from": [
+    "data/current_radar/current_situation_radar.md",
+    "docs/snapshot/18_snapshot_extraction_rules.md",
+    "docs/snapshot/19_index_methodology.md",
+    "docs/snapshot/20_radar_snapshot_schema.md"
+  ]
+}

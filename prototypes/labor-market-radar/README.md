@@ -41,8 +41,9 @@
 Техническая архитектура описана в:
 
 - `../../docs/17_dashboard_technical_architecture.md`
-- `../../docs/18_snapshot_extraction_rules.md`
-- `../../docs/19_index_methodology.md`
+- `../../docs/snapshot/18_snapshot_extraction_rules.md`
+- `../../docs/snapshot/19_index_methodology.md`
+- `../../docs/snapshot/20_radar_snapshot_schema.md`
 
 ## Что проверить в прототипе
 

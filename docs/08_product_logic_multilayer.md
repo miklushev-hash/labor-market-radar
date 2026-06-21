@@ -89,7 +89,7 @@
 
 Отдельно от этих форматов может собираться сводный радар текущей ситуации. Он не является регулярным выпуском и не добавляется в матрицу форматов как обязательный отчет. Его задача — по запросу пользователя собрать управленческий ответ "и что теперь?" на основе уже готовых выпусков и выразить текущую картину через индексы.
 
-Правила извлечения структурированных данных для радара описаны в [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/18_snapshot_extraction_rules.md), методика индексов — в [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/19_index_methodology.md).
+Правила извлечения структурированных данных для радара описаны в [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/18_snapshot_extraction_rules.md), методика индексов — в [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/19_index_methodology.md), схема `radar_snapshot.json` — в [20_radar_snapshot_schema.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/20_radar_snapshot_schema.md).
 
 ### Недельный срез
 
