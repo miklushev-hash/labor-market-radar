@@ -181,8 +181,6 @@
 
     .span-3 { grid-column: span 3; }
     .span-4 { grid-column: span 4; }
-    .span-5 { grid-column: span 5; }
-    .span-7 { grid-column: span 7; }
     .span-12 { grid-column: span 12; }
 
     .metrics-row {
@@ -195,11 +193,17 @@
     .metric-card {
       min-width: 0;
       min-height: 154px;
-      padding: 16px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: rgba(255, 255, 255, .88);
       box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+
+    .metric-main {
+      padding: 16px;
     }
 
     h2 {
@@ -285,56 +289,21 @@
     .metric-caption.medium { color: var(--amber); }
     .metric-caption.low { color: var(--red); }
 
-    .bar-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .bar-row {
-      display: grid;
-      grid-template-columns: minmax(170px, 220px) 1fr 46px;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .bar-row label {
+    .metric-meaning {
+      padding: 12px 16px 14px;
+      border-top: 1px solid var(--line);
+      background: #f6fbf7;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
+      font-size: 12.5px;
+      line-height: 1.42;
     }
 
-    .bar {
-      height: 12px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #e7ece5;
-    }
-
-    .bar span {
+    .metric-meaning strong {
       display: block;
-      width: var(--w);
-      height: 100%;
-      border-radius: inherit;
-      background: var(--c);
-    }
-
-    .bar-row b {
-      color: var(--muted);
-      font-size: 13px;
-      text-align: right;
-    }
-
-    .bar-row small {
-      display: block;
-      margin-top: 3px;
-    }
-
-    .bar-explain {
-      grid-column: 1 / -1;
-      margin: -6px 0 2px 0;
-      color: var(--muted);
+      margin-bottom: 4px;
+      color: var(--ink);
       font-size: 12px;
-      line-height: 1.4;
+      line-height: 1.2;
     }
 
     .cards {
@@ -439,7 +408,7 @@
       .nav { grid-template-columns: repeat(4, 1fr); }
       .topbar { display: grid; }
       .source { min-width: 0; }
-      .span-3, .span-4, .span-5, .span-7 { grid-column: span 12; }
+      .span-3, .span-4 { grid-column: span 12; }
       .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .actions { grid-template-columns: 1fr; }
     }
@@ -450,7 +419,6 @@
       .subtitle { font-size: 15px; }
       .nav { grid-template-columns: 1fr; }
       .metrics-row { grid-template-columns: 1fr; }
-      .bar-row { grid-template-columns: 1fr 1fr 38px; }
       .card-head { display: grid; }
       .badge { max-width: none; width: fit-content; }
     }
@@ -500,12 +468,7 @@
       <section id="dashboard" class="view grid">
         <div class="metrics-row" id="metricsRow"></div>
 
-        <article class="panel span-7">
-          <h2>Что означают индексы</h2>
-          <div class="bar-list" id="indexBars"></div>
-        </article>
-
-        <article class="panel span-5">
+        <article class="panel span-12">
           <h2>Текущий режим</h2>
           <div class="cards">
             <div class="card">
@@ -602,8 +565,6 @@
       basis: []
     };
 
-    const colors = ["var(--green)", "var(--teal)", "var(--blue)", "var(--amber)", "var(--red)"];
-
     document.querySelectorAll(".nav button").forEach(button => {
       button.addEventListener("click", () => {
         document.querySelectorAll(".nav button").forEach(item => item.classList.remove("active"));
@@ -678,22 +639,19 @@
     function renderMetrics(indexes) {
       document.getElementById("metricsRow").innerHTML = indexes.map(index => `
         <article class="metric-card">
-          <div class="metric-title">
-            <div class="metric-label">${escapeHtml(index.name)}</div>
-            <span class="info-dot" tabindex="0" aria-label="Пояснение индекса" data-tooltip="${escapeHtml(tooltipText(index))}">?</span>
+          <div class="metric-main">
+            <div class="metric-title">
+              <div class="metric-label">${escapeHtml(index.name)}</div>
+              <span class="info-dot" tabindex="0" aria-label="Пояснение индекса" data-tooltip="${escapeHtml(tooltipText(index))}">?</span>
+            </div>
+            <div class="metric-value">${escapeHtml(index.score)}</div>
+            <div class="metric-caption ${confidenceClass(index?.confidence)}">${escapeHtml(index.label)}</div>
           </div>
-          <div class="metric-value">${escapeHtml(index.score)}</div>
-          <div class="metric-caption ${confidenceClass(index?.confidence)}">${escapeHtml(index.label)}</div>
+          <div class="metric-meaning">
+            <strong>Это означает, что</strong>
+            ${escapeHtml(index.explanation)}
+          </div>
         </article>
-      `).join("");
-
-      document.getElementById("indexBars").innerHTML = indexes.map((index, itemIndex) => `
-        <div class="bar-row">
-          <label>${escapeHtml(index.name)}<br><small>${escapeHtml(index.label)}</small></label>
-          <div class="bar"><span style="--w:${Number(index.score) || 0}%;--c:${colors[itemIndex % colors.length]}"></span></div>
-          <b>${escapeHtml(index.score)}</b>
-          <div class="bar-explain">${escapeHtml(index.explanation)}</div>
-        </div>
       `).join("");
     }
 
