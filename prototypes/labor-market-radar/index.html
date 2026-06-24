@@ -185,6 +185,23 @@
     .span-7 { grid-column: span 7; }
     .span-12 { grid-column: span 12; }
 
+    .metrics-row {
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric-card {
+      min-width: 0;
+      min-height: 154px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: var(--shadow);
+    }
+
     h2 {
       margin: 0 0 12px;
       font-size: 18px;
@@ -196,6 +213,58 @@
       color: var(--muted);
       font-size: 12px;
       line-height: 1.35;
+    }
+
+    .metric-title {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .info-dot {
+      position: relative;
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #cbd8cf;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: #f6fbf7;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: help;
+    }
+
+    .info-dot::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      z-index: 10;
+      top: 24px;
+      right: 0;
+      width: min(320px, 78vw);
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: left;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity .16s ease, transform .16s ease;
+      white-space: normal;
+    }
+
+    .info-dot:hover::after,
+    .info-dot:focus::after {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .metric-value {
@@ -253,6 +322,19 @@
       color: var(--muted);
       font-size: 13px;
       text-align: right;
+    }
+
+    .bar-row small {
+      display: block;
+      margin-top: 3px;
+    }
+
+    .bar-explain {
+      grid-column: 1 / -1;
+      margin: -6px 0 2px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
     }
 
     .cards {
@@ -358,6 +440,7 @@
       .topbar { display: grid; }
       .source { min-width: 0; }
       .span-3, .span-4, .span-5, .span-7 { grid-column: span 12; }
+      .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .actions { grid-template-columns: 1fr; }
     }
 
@@ -366,6 +449,7 @@
       h1 { font-size: 28px; }
       .subtitle { font-size: 15px; }
       .nav { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: 1fr; }
       .bar-row { grid-template-columns: 1fr 1fr 38px; }
       .card-head { display: grid; }
       .badge { max-width: none; width: fit-content; }
@@ -391,11 +475,11 @@
       </nav>
 
       <div class="side-block">
-        Дашборд читает структурированный snapshot. Внутренний контур компании пока не подключен и отмечен как ограничение продукта.
+        Дашборд показывает последнюю подготовленную оценку рынка. Внутренний контур компании пока не подключен и отмечен как ограничение продукта.
         <div class="side-meta">
-          <span class="status-pill" id="snapshotStatus">snapshot: загрузка</span>
-          <span class="status-pill warning" id="methodologyStatus">methodology: загрузка</span>
-          <span id="asOfDate">as of: ...</span>
+          <span class="status-pill" id="snapshotStatus">статус: загрузка</span>
+          <span class="status-pill warning" id="methodologyStatus">методика: загрузка</span>
+          <span id="asOfDate">дата оценки: ...</span>
         </div>
       </div>
     </aside>
@@ -403,40 +487,21 @@
     <main>
       <section class="topbar">
         <div>
-          <h1 id="pageTitle">Радар рынка труда и внутренних рисков</h1>
-          <p class="subtitle" id="shortAnswer">Загружаю snapshot...</p>
+          <h1 id="pageTitle">Радар рынка труда ИТ</h1>
+          <p class="subtitle" id="shortAnswer">Загружаю данные...</p>
         </div>
         <div class="source">
           <strong>Источник данных</strong><br>
-          <span id="sourcePath">../../data/current_radar/radar_snapshot.json</span><br>
+          <span id="sourcePath">Загрузка оснований...</span><br>
           <span id="loadState">Загрузка...</span>
         </div>
       </section>
 
       <section id="dashboard" class="view grid">
-        <article class="panel span-3">
-          <div class="metric-label" id="metricLabel0">Индекс</div>
-          <div class="metric-value" id="metricScore0">...</div>
-          <div class="metric-caption" id="metricCaption0">...</div>
-        </article>
-        <article class="panel span-3">
-          <div class="metric-label" id="metricLabel1">Индекс</div>
-          <div class="metric-value" id="metricScore1">...</div>
-          <div class="metric-caption" id="metricCaption1">...</div>
-        </article>
-        <article class="panel span-3">
-          <div class="metric-label" id="metricLabel2">Индекс</div>
-          <div class="metric-value" id="metricScore2">...</div>
-          <div class="metric-caption" id="metricCaption2">...</div>
-        </article>
-        <article class="panel span-3">
-          <div class="metric-label" id="metricLabel3">Индекс</div>
-          <div class="metric-value" id="metricScore3">...</div>
-          <div class="metric-caption" id="metricCaption3">...</div>
-        </article>
+        <div class="metrics-row" id="metricsRow"></div>
 
         <article class="panel span-7">
-          <h2>Индексы snapshot</h2>
+          <h2>Что означают индексы</h2>
           <div class="bar-list" id="indexBars"></div>
         </article>
 
@@ -519,9 +584,10 @@
       methodology_status: "expert_pilot",
       dashboard_binding: "not_connected",
       market_mode: {
-        label: "Snapshot не загружен"
+        label: "Данные не загружены",
+        explanation: "Не удалось получить рабочий файл с оценкой рынка."
       },
-      short_answer: "Не удалось загрузить radar_snapshot.json. Проверьте путь к файлу и публикацию GitHub Pages.",
+      short_answer: "Не удалось загрузить данные дашборда. Проверьте публикацию рабочего файла.",
       indexes: [],
       signals: [],
       actions: [],
@@ -559,16 +625,16 @@
 
     function statusText(value) {
       const map = {
-        pilot: "пилот",
+        pilot: "предварительная экспертная оценка",
         draft: "черновик",
         approved: "утверждено",
         archived: "архив",
-        expert_pilot: "экспертная методология",
+        expert_pilot: "экспертная методика, не математическая модель",
         partially_validated: "частично подтверждена",
         mathematically_validated: "математически подтверждена",
-        not_connected: "JSON не подключен",
-        connected_with_fallback: "JSON + fallback",
-        connected_required: "только JSON",
+        not_connected: "данные не подключены",
+        connected_with_fallback: "данные загружены из рабочего файла",
+        connected_required: "только рабочий файл данных",
         confirmed: "подтвержден",
         supported: "поддержан",
         watch: "наблюдение",
@@ -580,6 +646,29 @@
       return map[value] || value || "не указано";
     }
 
+    function tooltipText(index) {
+      const tip = index?.tooltip;
+      if (!tip) return index?.explanation || "Пояснение пока не заполнено.";
+      return [
+        `Что показывает: ${tip.what}`,
+        `Зачем нужен: ${tip.why}`,
+        `На что смотрим: ${tip.inputs}`,
+        `Как читать: ${tip.how_to_read}`
+      ].join("\n\n");
+    }
+
+    function basisHumanName(item) {
+      const typeNames = {
+        annual_digest: "Годовой обзор",
+        quarterly_digest: "Квартальный обзор",
+        monthly_digest: "Месячный обзор",
+        weekly_digest: "Недельный срез",
+        current_situation_radar: "Сводный радар"
+      };
+      const type = typeNames[item.type] || item.type || "Основание";
+      return `${type}: ${item.period || "период не указан"}`;
+    }
+
     function confidenceClass(value) {
       if (value === "high" || value === "confirmed") return "high";
       if (value === "low" || value === "manual_check_required") return "low";
@@ -587,20 +676,23 @@
     }
 
     function renderMetrics(indexes) {
-      for (let i = 0; i < 4; i += 1) {
-        const index = indexes[i];
-        document.getElementById(`metricLabel${i}`).textContent = index ? index.name : "Индекс";
-        document.getElementById(`metricScore${i}`).textContent = index ? index.score : "n/a";
-        const caption = document.getElementById(`metricCaption${i}`);
-        caption.textContent = index ? index.label : "Нет данных в snapshot";
-        caption.className = `metric-caption ${confidenceClass(index?.confidence)}`;
-      }
+      document.getElementById("metricsRow").innerHTML = indexes.map(index => `
+        <article class="metric-card">
+          <div class="metric-title">
+            <div class="metric-label">${escapeHtml(index.name)}</div>
+            <span class="info-dot" tabindex="0" aria-label="Пояснение индекса" data-tooltip="${escapeHtml(tooltipText(index))}">?</span>
+          </div>
+          <div class="metric-value">${escapeHtml(index.score)}</div>
+          <div class="metric-caption ${confidenceClass(index?.confidence)}">${escapeHtml(index.label)}</div>
+        </article>
+      `).join("");
 
       document.getElementById("indexBars").innerHTML = indexes.map((index, itemIndex) => `
         <div class="bar-row">
           <label>${escapeHtml(index.name)}<br><small>${escapeHtml(index.label)}</small></label>
           <div class="bar"><span style="--w:${Number(index.score) || 0}%;--c:${colors[itemIndex % colors.length]}"></span></div>
           <b>${escapeHtml(index.score)}</b>
+          <div class="bar-explain">${escapeHtml(index.explanation)}</div>
         </div>
       `).join("");
     }
@@ -662,27 +754,39 @@
       `).join("");
     }
 
+    function renderSourceSummary(basis) {
+      if (!basis.length) {
+        document.getElementById("sourcePath").textContent = "Основания не указаны";
+        return;
+      }
+      document.getElementById("sourcePath").innerHTML = basis
+        .slice(0, 4)
+        .map(item => escapeHtml(basisHumanName(item)))
+        .join("<br>");
+    }
+
     function renderSnapshot(snapshot, loadedFromJson) {
       document.getElementById("pageTitle").textContent = snapshot.market_mode?.label || "Labor Market Radar";
-      document.getElementById("shortAnswer").textContent = snapshot.short_answer || "Нет краткого вывода в snapshot.";
-      document.getElementById("snapshotStatus").textContent = `snapshot: ${statusText(snapshot.status)}`;
-      document.getElementById("methodologyStatus").textContent = `methodology: ${statusText(snapshot.methodology_status)}`;
-      document.getElementById("asOfDate").textContent = `as of: ${snapshot.as_of_date || "не указано"}`;
+      document.getElementById("shortAnswer").textContent = snapshot.short_answer || "Нет краткого вывода.";
+      document.getElementById("snapshotStatus").textContent = `статус: ${statusText(snapshot.status)}`;
+      document.getElementById("methodologyStatus").textContent = `методика: ${statusText(snapshot.methodology_status)}`;
+      document.getElementById("asOfDate").textContent = `дата оценки: ${snapshot.as_of_date || "не указано"}`;
       document.getElementById("dashboardBinding").textContent = statusText(snapshot.dashboard_binding);
       document.getElementById("marketModeLabel").textContent = snapshot.market_mode?.label || "Режим не указан";
-      document.getElementById("marketModeText").textContent = snapshot.short_answer || "";
+      document.getElementById("marketModeText").textContent = snapshot.market_mode?.explanation || snapshot.short_answer || "";
       document.getElementById("loadState").textContent = loadedFromJson
-        ? `Загружен snapshot ${snapshot.snapshot_id}`
-        : "Внимание: используется fallback, snapshot не загружен";
+        ? `Данные загружены: ${snapshot.as_of_date || "дата не указана"}`
+        : "Внимание: рабочий файл данных не загрузился";
       document.getElementById("technicalNote").textContent = loadedFromJson
-        ? "Это уже интерфейс поверх snapshot. Если обновить radar_snapshot.json, дашборд покажет новую картину после публикации файла."
-        : "Данные не загружены из JSON. Эта страница не должна использоваться как актуальный радар до устранения ошибки загрузки.";
+        ? "Если обновить рабочий файл данных, дашборд покажет новую утвержденную картину после публикации."
+        : "Данные не загружены. Эта страница не должна использоваться как актуальная картина до устранения ошибки.";
 
       renderMetrics(snapshot.indexes || []);
       renderSignals(snapshot.signals || []);
       renderActions(snapshot.actions || []);
       renderLimitations(snapshot.limitations || []);
       renderBasis(snapshot.basis || []);
+      renderSourceSummary(snapshot.basis || []);
     }
 
     async function loadSnapshot() {
