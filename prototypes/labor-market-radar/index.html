@@ -181,6 +181,7 @@
 
     .span-3 { grid-column: span 3; }
     .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
     .span-12 { grid-column: span 12; }
 
     .metrics-row {
@@ -337,6 +338,68 @@
     .card strong { font-size: 15px; line-height: 1.3; }
     .card p { margin: 0; color: var(--muted); line-height: 1.45; font-size: 13px; }
 
+    .insight-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .insight-item {
+      display: grid;
+      gap: 5px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .insight-item strong {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .insight-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.42;
+    }
+
+    .salary-strip {
+      display: grid;
+      grid-template-columns: 1.15fr repeat(3, minmax(0, .72fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .salary-summary {
+      padding: 12px;
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      background: #fffaf0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .salary-point {
+      display: grid;
+      gap: 5px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .salary-point b {
+      font-size: 20px;
+      line-height: 1.1;
+    }
+
+    .salary-point small {
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
     .badge {
       flex: 0 0 auto;
       max-width: 190px;
@@ -415,8 +478,9 @@
       .nav { grid-template-columns: repeat(4, 1fr); }
       .topbar { display: grid; }
       .source { min-width: 0; }
-      .span-3, .span-4 { grid-column: span 12; }
+      .span-3, .span-4, .span-6 { grid-column: span 12; }
       .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .salary-strip { grid-template-columns: 1fr; }
       .actions { grid-template-columns: 1fr; }
     }
 
@@ -475,18 +539,19 @@
       <section id="dashboard" class="view grid">
         <div class="metrics-row" id="metricsRow"></div>
 
+        <article class="panel span-6">
+          <h2>Что произошло за период</h2>
+          <div class="insight-list" id="periodOverview"></div>
+        </article>
+
+        <article class="panel span-6">
+          <h2>Яркие события ИТ-рынка</h2>
+          <div class="insight-list" id="itMarketEvents"></div>
+        </article>
+
         <article class="panel span-12">
-          <h2>Текущий режим</h2>
-          <div class="cards">
-            <div class="card">
-              <div class="card-head">
-                <strong id="marketModeLabel">...</strong>
-                <span class="badge" id="dashboardBinding">...</span>
-              </div>
-              <p id="marketModeText">...</p>
-            </div>
-            <div class="note" id="technicalNote"></div>
-          </div>
+          <h2>Зарплатный фон</h2>
+          <div class="salary-strip" id="salaryDynamics"></div>
         </article>
 
         <article class="panel span-12">
@@ -558,6 +623,9 @@
         explanation: "Не удалось получить рабочий файл с оценкой рынка."
       },
       short_answer: "Не удалось загрузить данные дашборда. Проверьте публикацию рабочего файла.",
+      period_overview: [],
+      it_market_events: [],
+      salary_dynamics: null,
       indexes: [],
       signals: [],
       actions: [],
@@ -686,6 +754,42 @@
       `).join("");
     }
 
+    function renderInsightList(elementId, items, emptyText) {
+      const element = document.getElementById(elementId);
+      if (!items?.length) {
+        element.innerHTML = `<div class="note">${escapeHtml(emptyText)}</div>`;
+        return;
+      }
+      element.innerHTML = items.map(item => `
+        <div class="insight-item">
+          <strong>${escapeHtml(item.title)}</strong>
+          <p>${escapeHtml(item.text)}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderSalaryDynamics(salary) {
+      const element = document.getElementById("salaryDynamics");
+      if (!salary) {
+        element.innerHTML = `<div class="note">Зарплатная динамика пока не подключена к рабочему файлу данных.</div>`;
+        return;
+      }
+      const items = salary.items || [];
+      element.innerHTML = `
+        <div class="salary-summary">
+          <strong>${escapeHtml(salary.title || "Зарплатный фон")}</strong><br>
+          ${escapeHtml(salary.summary || "")}
+        </div>
+        ${items.map(item => `
+          <div class="salary-point">
+            <small>${escapeHtml(item.period)}</small>
+            <b>${escapeHtml(item.value)}</b>
+            <small>${escapeHtml(item.source)}</small>
+          </div>
+        `).join("")}
+      `;
+    }
+
     function renderActions(actions) {
       document.getElementById("actionsList").innerHTML = actions.map(action => `
         <div class="action">
@@ -736,17 +840,14 @@
       document.getElementById("snapshotStatus").textContent = `статус: ${statusText(snapshot.status)}`;
       document.getElementById("methodologyStatus").textContent = `методика: ${statusText(snapshot.methodology_status)}`;
       document.getElementById("asOfDate").textContent = `дата оценки: ${snapshot.as_of_date || "не указано"}`;
-      document.getElementById("dashboardBinding").textContent = statusText(snapshot.dashboard_binding);
-      document.getElementById("marketModeLabel").textContent = snapshot.market_mode?.label || "Режим не указан";
-      document.getElementById("marketModeText").textContent = snapshot.market_mode?.explanation || snapshot.short_answer || "";
       document.getElementById("loadState").textContent = loadedFromJson
         ? `Данные загружены: ${snapshot.as_of_date || "дата не указана"}`
         : "Внимание: рабочий файл данных не загрузился";
-      document.getElementById("technicalNote").textContent = loadedFromJson
-        ? "Если обновить рабочий файл данных, дашборд покажет новую утвержденную картину после публикации."
-        : "Данные не загружены. Эта страница не должна использоваться как актуальная картина до устранения ошибки.";
 
       renderMetrics(snapshot.indexes || []);
+      renderInsightList("periodOverview", snapshot.period_overview || [], "Ключевые выводы периода пока не заполнены.");
+      renderInsightList("itMarketEvents", snapshot.it_market_events || [], "Яркие события ИТ-рынка пока не заполнены.");
+      renderSalaryDynamics(snapshot.salary_dynamics);
       renderSignals(snapshot.signals || []);
       renderActions(snapshot.actions || []);
       renderLimitations(snapshot.limitations || []);
