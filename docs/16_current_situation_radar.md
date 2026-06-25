@@ -159,8 +159,8 @@
 Рекомендуемые имена:
 
 - `data/current_radar/current_situation_radar.md`
-- `presentations/current_situation_radar.html`
-- `presentations/current_situation_radar.pdf`
+- `presentations/Сводный радар <ДД.ММ.ГГГГ>.html`
+- `presentations/Сводный радар <ДД.ММ.ГГГГ>.pdf`
 
 Если пользователь просит радар на конкретную дату, дата фиксируется в заголовке и метаданных.
 

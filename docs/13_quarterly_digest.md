@@ -116,5 +116,5 @@
 ## Правило именования
 
 - Markdown: `data/<period>/quarterly_digest.md`
-- короткий квартальный выпуск: `presentations/<period>_quarterly_brief.html` и `presentations/<period>_quarterly_brief.pdf`
-- полный квартальный обзор: `presentations/<period>_quarterly_director_deck.html` и `presentations/<period>_quarterly_director_deck.pdf`
+- короткий квартальный выпуск: `presentations/Квартальный обзор <N квартал> <год>.html` и `presentations/Квартальный обзор <N квартал> <год>.pdf`
+- полный квартальный обзор: `presentations/Квартальный обзор <N квартал> <год>.html` и `presentations/Квартальный обзор <N квартал> <год>.pdf`

@@ -169,8 +169,8 @@
 ## Правило именования
 
 - Markdown: `data/<period>/annual_digest.md`
-- короткий годовой выпуск: `presentations/<period>_annual_brief.html` и `presentations/<period>_annual_brief.pdf`
-- полный годовой обзор: `presentations/<period>_annual_director_deck.html` и `presentations/<period>_annual_director_deck.pdf`
+- короткий годовой выпуск: `presentations/Годовой обзор <год>.html` и `presentations/Годовой обзор <год>.pdf`
+- полный годовой обзор: `presentations/Годовой обзор <год>.html` и `presentations/Годовой обзор <год>.pdf`
 
 ## Важная оговорка для ретросборки
 

@@ -29,70 +29,70 @@
 ### Если корпус недели узкий
 
 - `data/<week>/weekly_digest_multilayer.md`
-- `presentations/<week>_short_update_brief.html`
-- `presentations/<week>_short_update_brief.pdf`
+- `presentations/Недельный срез <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.html`
+- `presentations/Недельный срез <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.pdf`
 
 ### Если корпус недели широкий
 
 - `data/<week>/weekly_digest_multilayer.md`
-- `presentations/<week>_director_deck.html`
-- `presentations/<week>_director_deck.pdf`
+- `presentations/Недельный обзор <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.html`
+- `presentations/Недельный обзор <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.pdf`
 
 ## Месячный комплект
 
 ### Если корпус месяца узкий
 
 - `data/<period>/monthly_digest.md`
-- `presentations/<period>_monthly_brief.html`
-- `presentations/<period>_monthly_brief.pdf`
+- `presentations/Месячный обзор <месяц> <год>.html`
+- `presentations/Месячный обзор <месяц> <год>.pdf`
 
 ### Если корпус месяца широкий
 
 - `data/<period>/monthly_digest.md`
-- `presentations/<period>_monthly_director_deck.html`
-- `presentations/<period>_monthly_director_deck.pdf`
+- `presentations/Месячный обзор <месяц> <год>.html`
+- `presentations/Месячный обзор <месяц> <год>.pdf`
 
 ## Квартальный комплект
 
 ### Если корпус квартала узкий
 
 - `data/<period>/quarterly_digest.md`
-- `presentations/<period>_quarterly_brief.html`
-- `presentations/<period>_quarterly_brief.pdf`
+- `presentations/Квартальный обзор <N квартал> <год>.html`
+- `presentations/Квартальный обзор <N квартал> <год>.pdf`
 
 ### Если корпус квартала широкий
 
 - `data/<period>/quarterly_digest.md`
-- `presentations/<period>_quarterly_director_deck.html`
-- `presentations/<period>_quarterly_director_deck.pdf`
+- `presentations/Квартальный обзор <N квартал> <год>.html`
+- `presentations/Квартальный обзор <N квартал> <год>.pdf`
 
 ## Полугодовой комплект
 
 ### Если корпус полугодия узкий
 
 - `data/<period>/halfyear_digest.md`
-- `presentations/<period>_halfyear_brief.html`
-- `presentations/<period>_halfyear_brief.pdf`
+- `presentations/Полугодовой обзор <N полугодие> <год>.html`
+- `presentations/Полугодовой обзор <N полугодие> <год>.pdf`
 
 ### Если корпус полугодия широкий
 
 - `data/<period>/halfyear_digest.md`
-- `presentations/<period>_halfyear_director_deck.html`
-- `presentations/<period>_halfyear_director_deck.pdf`
+- `presentations/Полугодовой обзор <N полугодие> <год>.html`
+- `presentations/Полугодовой обзор <N полугодие> <год>.pdf`
 
 ## Годовой комплект
 
 ### Если корпус года узкий
 
 - `data/<period>/annual_digest.md`
-- `presentations/<period>_annual_brief.html`
-- `presentations/<period>_annual_brief.pdf`
+- `presentations/Годовой обзор <год>.html`
+- `presentations/Годовой обзор <год>.pdf`
 
 ### Если корпус года широкий
 
 - `data/<period>/annual_digest.md`
-- `presentations/<period>_annual_director_deck.html`
-- `presentations/<period>_annual_director_deck.pdf`
+- `presentations/Годовой обзор <год>.html`
+- `presentations/Годовой обзор <год>.pdf`
 
 ## Правило выбора формата
 
@@ -196,8 +196,8 @@
 Рекомендуемые выходные файлы:
 
 - `data/current_radar/current_situation_radar.md`
-- `presentations/current_situation_radar.html`
-- `presentations/current_situation_radar.pdf`
+- `presentations/Сводный радар <ДД.ММ.ГГГГ>.html`
+- `presentations/Сводный радар <ДД.ММ.ГГГГ>.pdf`
 
 Шаблон находится в файле:
 

@@ -108,5 +108,5 @@
 ## Правило именования
 
 - Markdown: `data/<period>/halfyear_digest.md`
-- короткий полугодовой выпуск: `presentations/<period>_halfyear_brief.html` и `presentations/<period>_halfyear_brief.pdf`
-- полный полугодовой обзор: `presentations/<period>_halfyear_director_deck.html` и `presentations/<period>_halfyear_director_deck.pdf`
+- короткий полугодовой выпуск: `presentations/Полугодовой обзор <N полугодие> <год>.html` и `presentations/Полугодовой обзор <N полугодие> <год>.pdf`
+- полный полугодовой обзор: `presentations/Полугодовой обзор <N полугодие> <год>.html` и `presentations/Полугодовой обзор <N полугодие> <год>.pdf`

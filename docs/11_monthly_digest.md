@@ -181,5 +181,5 @@
 ## Правило именования
 
 - Markdown: `data/<period>/monthly_digest.md`
-- короткий месячный выпуск: `presentations/<period>_monthly_brief.html` и `presentations/<period>_monthly_brief.pdf`
-- полный месячный обзор: `presentations/<period>_monthly_director_deck.html` и `presentations/<period>_monthly_director_deck.pdf`
+- короткий месячный выпуск: `presentations/Месячный обзор <месяц> <год>.html` и `presentations/Месячный обзор <месяц> <год>.pdf`
+- полный месячный обзор: `presentations/Месячный обзор <месяц> <год>.html` и `presentations/Месячный обзор <месяц> <год>.pdf`

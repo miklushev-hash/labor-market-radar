@@ -90,58 +90,58 @@ data/
 
 Если неделя собрана как короткий выпуск:
 
-- `<week>_short_update_brief.html`
-- `<week>_short_update_brief.pdf`
+- `Недельный срез <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.html`
+- `Недельный срез <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.pdf`
 
 Если неделя собрана как полная директорская версия:
 
-- `<week>_director_deck.html`
-- `<week>_director_deck.pdf`
+- `Недельный обзор <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.html`
+- `Недельный обзор <ДД.ММ.ГГГГ-ДД.ММ.ГГГГ>.pdf`
 
 ### Месяц
 
 Если месяц собран как короткий выпуск:
 
-- `<period>_monthly_brief.html`
-- `<period>_monthly_brief.pdf`
+- `Месячный обзор <месяц> <год>.html`
+- `Месячный обзор <месяц> <год>.pdf`
 
 Если месяц собран как полная директорская версия:
 
-- `<period>_monthly_director_deck.html`
-- `<period>_monthly_director_deck.pdf`
+- `Месячный обзор <месяц> <год>.html`
+- `Месячный обзор <месяц> <год>.pdf`
 
 ### Квартал
 
 Если квартал собран как короткий выпуск:
 
-- `<period>_quarterly_brief.html`
-- `<period>_quarterly_brief.pdf`
+- `Квартальный обзор <N квартал> <год>.html`
+- `Квартальный обзор <N квартал> <год>.pdf`
 
 Если квартал собран как полная директорская версия:
 
-- `<period>_quarterly_director_deck.html`
-- `<period>_quarterly_director_deck.pdf`
+- `Квартальный обзор <N квартал> <год>.html`
+- `Квартальный обзор <N квартал> <год>.pdf`
 
 ### Полугодие
 
 Если полугодие собрано как короткий выпуск:
 
-- `<period>_halfyear_brief.html`
-- `<period>_halfyear_brief.pdf`
+- `Полугодовой обзор <N полугодие> <год>.html`
+- `Полугодовой обзор <N полугодие> <год>.pdf`
 
 Если полугодие собрано как полная директорская версия:
 
-- `<period>_halfyear_director_deck.html`
-- `<period>_halfyear_director_deck.pdf`
+- `Полугодовой обзор <N полугодие> <год>.html`
+- `Полугодовой обзор <N полугодие> <год>.pdf`
 
 ### Год
 
 Если год собран как короткий выпуск:
 
-- `<period>_annual_brief.html`
-- `<period>_annual_brief.pdf`
+- `Годовой обзор <год>.html`
+- `Годовой обзор <год>.pdf`
 
 Если год собран как полная директорская версия:
 
-- `<period>_annual_director_deck.html`
-- `<period>_annual_director_deck.pdf`
+- `Годовой обзор <год>.html`
+- `Годовой обзор <год>.pdf`
