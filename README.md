@@ -28,6 +28,8 @@ https://miklushev-hash.github.io/labor-market-radar/
 https://miklushev-hash.github.io/labor-market-radar/prototypes/labor-market-radar/
 ```
 
+Публичная страница показывает внешний/демонстрационный контур. Реальные внутренние данные компании и практики 1С не публикуются на GitHub Pages.
+
 Если закладки в браузере потерялись, путь такой:
 
 1. открыть GitHub;
@@ -92,6 +94,12 @@ https://miklushev-hash.github.io/labor-market-radar/prototypes/labor-market-rada
 - [18_snapshot_extraction_rules.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/18_snapshot_extraction_rules.md)
 - [19_index_methodology.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/19_index_methodology.md)
 - [20_radar_snapshot_schema.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/snapshot/20_radar_snapshot_schema.md)
+
+Внутренний контур практики 1С описан отдельно:
+
+- [21_internal_contour_1c_practice.md](C:/Users/emiklush/Desktop/Codex/Обзор%20РТ/docs/21_internal_contour_1c_practice.md)
+
+Внутренние данные практики 1С хранятся только локально в `data/internal_1c/`. Эта папка исключена из Git и не должна попадать на GitHub.
 
 Рабочие исходные материалы, которые нужны для продукта, но не должны мешать в корне, лежат в папке `source`. К ним относятся рабочая сборка продукта, теоретические материалы и вспомогательные сценарии.
 
