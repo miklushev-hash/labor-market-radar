@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Labor Market Radar | Практика 1С</title>
+  <style>
+    :root {
+      --bg: #f5f7f4;
+      --surface: #ffffff;
+      --ink: #17231d;
+      --muted: #62706a;
+      --line: #d8ded6;
+      --accent: #087a65;
+      --accent-dark: #075f50;
+      --soft: #e8f2ee;
+      --warn: #c77d14;
+      --warn-bg: #fff3d6;
+      --danger: #b9413d;
+      --danger-bg: #fce8e6;
+      --blue: #2f67a8;
+      --blue-bg: #e8f0fe;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px;
+      background: #fbfcfa;
+      border-right: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #285b9d);
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    nav button {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 18px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    nav button.active {
+      color: var(--ink);
+      background: var(--soft);
+      border-color: #cddbd4;
+      font-weight: 700;
+    }
+
+    .side-note {
+      margin-top: 34px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      line-height: 1.45;
+      background: var(--surface);
+    }
+
+    main {
+      padding: 36px;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 920px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill.demo {
+      color: #8a5a00;
+      background: var(--warn-bg);
+      border-color: #f1d087;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .panel,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    p {
+      line-height: 1.45;
+    }
+
+    .metric {
+      padding: 22px;
+    }
+
+    .metric small {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    .metric p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr 220px;
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfa;
+    }
+
+    .comparison + .comparison {
+      margin-top: 14px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 34px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .status.confirmed {
+      color: #12633a;
+      background: #dff3e4;
+    }
+
+    .status.diverges {
+      color: #895200;
+      background: var(--warn-bg);
+    }
+
+    .status.insufficient {
+      color: #555;
+      background: #ecefec;
+    }
+
+    .status.early {
+      color: #1a56a3;
+      background: var(--blue-bg);
+    }
+
+    .status.demo {
+      color: #7a4111;
+      background: #ffe6c7;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfa;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .table th {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .error {
+      padding: 16px 18px;
+      border: 1px solid #efb1ac;
+      border-radius: 8px;
+      color: #8b1e1a;
+      background: var(--danger-bg);
+    }
+
+    @media (max-width: 980px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+      }
+
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .span-8,
+      .span-6,
+      .span-4 {
+        grid-column: span 12;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">
+        <div class="logo">1С</div>
+        <div>
+          <strong>Labor Market Radar</strong>
+          <span>Внутренний демо-режим</span>
+        </div>
+      </div>
+      <nav aria-label="Разделы">
+        <button class="active" data-view="practice">Практика 1С</button>
+        <button data-view="market">Внешний рынок</button>
+        <button data-view="checks">Что проверить</button>
+        <button data-view="limits">Ограничения</button>
+      </nav>
+      <div class="side-note">
+        <strong>Демо-режим.</strong>
+        <p>Экран показывает механику будущего внутреннего продукта на вымышленных данных. Реальные данные практики 1С сюда не загружены.</p>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div>
+          <h1 id="pageTitle">Практика 1С</h1>
+          <p class="subtitle" id="pageSubtitle">Загружаю внешний рынок и демо-слой практики 1С...</p>
+        </div>
+        <div class="pills">
+          <span class="pill demo">демо на вымышленных данных</span>
+          <span class="pill" id="asOfDate">дата оценки: ...</span>
+          <span class="pill" id="loadStatus">данные: загрузка</span>
+        </div>
+      </div>
+
+      <section class="view active" id="view-practice">
+        <div class="grid">
+          <article class="panel span-12">
+            <h2>Общий вывод по практике</h2>
+            <p id="overallExplanation" class="muted"></p>
+          </article>
+
+          <div id="summaryCards" class="grid span-12"></div>
+
+          <article class="panel span-12">
+            <h2>Сверка рынка и практики 1С</h2>
+            <div id="comparisons"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-market">
+        <div class="grid">
+          <article class="panel span-12">
+            <h2>Внешний рыночный режим</h2>
+            <h3 id="marketMode"></h3>
+            <p id="marketExplanation" class="muted"></p>
+          </article>
+          <article class="panel span-12">
+            <h2>Внешние основания</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Основание</th>
+                  <th>Период</th>
+                  <th>Роль</th>
+                </tr>
+              </thead>
+              <tbody id="basisRows"></tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-checks">
+        <div class="grid">
+          <article class="panel span-6">
+            <h2>Что проверить</h2>
+            <ul class="list" id="checkList"></ul>
+          </article>
+          <article class="panel span-6">
+            <h2>Что делать</h2>
+            <ul class="list" id="actionList"></ul>
+          </article>
+          <article class="panel span-12">
+            <h2>Реперные точки планирования</h2>
+            <div id="planningPoints" class="grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-limits">
+        <div class="grid">
+          <article class="panel span-12">
+            <h2>Ограничения</h2>
+            <ul class="list" id="limitations"></ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const MARKET_SNAPSHOT_URL = "../../data/current_radar/radar_snapshot.json";
+    const INTERNAL_1C_URL = "../../data/internal_1c_demo/internal_1c_snapshot.json";
+
+    const statusClassMap = {
+      "подтверждается": "confirmed",
+      "расходится": "diverges",
+      "недостаточно данных": "insufficient",
+      "ранний внутренний сигнал": "early"
+    };
+
+    document.querySelectorAll("nav button").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("nav button").forEach((item) => item.classList.remove("active"));
+        document.querySelectorAll(".view").forEach((view) => view.classList.remove("active"));
+        button.classList.add("active");
+        document.getElementById(`view-${button.dataset.view}`).classList.add("active");
+      });
+    });
+
+    function statusBadge(status) {
+      const className = statusClassMap[status] || "demo";
+      return `<span class="status ${className}">${escapeHtml(status || "статус не указан")}</span>`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderSummaryCards(cards) {
+      const container = document.getElementById("summaryCards");
+      container.innerHTML = (cards || []).map((card) => `
+        <article class="card metric span-4">
+          <small>${escapeHtml(card.title)}</small>
+          <strong>${escapeHtml(card.value)}</strong>
+          <p><b>${escapeHtml(card.label)}</b></p>
+          <p>${escapeHtml(card.meaning)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderComparisons(comparisons) {
+      const container = document.getElementById("comparisons");
+      container.innerHTML = (comparisons || []).map((item) => `
+        <section class="comparison">
+          <div>
+            <h3>${escapeHtml(item.theme)}</h3>
+            <p><b>Рынок:</b> ${escapeHtml(item.external_signal)}</p>
+            <p class="muted">${escapeHtml(item.external_basis)}</p>
+          </div>
+          <div>
+            <p><b>Практика 1С:</b> ${escapeHtml(item.internal_fact)}</p>
+            <p><b>${escapeHtml(item.metric?.name)}:</b> ${escapeHtml(item.metric?.value)} · ${escapeHtml(item.metric?.benchmark)}</p>
+            <p class="muted">${escapeHtml(item.explanation)}</p>
+          </div>
+          <div>
+            ${statusBadge(item.status)}
+            <p><b>Уверенность:</b> ${escapeHtml(item.confidence)}</p>
+            <p>${escapeHtml(item.recommended_action)}</p>
+          </div>
+        </section>
+      `).join("");
+    }
+
+    function renderChecks(comparisons) {
+      const checks = [];
+      const actions = [];
+      (comparisons || []).forEach((item) => {
+        (item.what_to_check || []).forEach((check) => checks.push(`${item.theme}: ${check}`));
+        if (item.recommended_action) actions.push(`${item.theme}: ${item.recommended_action}`);
+      });
+
+      document.getElementById("checkList").innerHTML = checks.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      document.getElementById("actionList").innerHTML = actions.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    }
+
+    function renderPlanning(points) {
+      document.getElementById("planningPoints").innerHTML = (points || []).map((point) => `
+        <article class="card metric span-4">
+          <small>${escapeHtml(point.title)}</small>
+          <strong>${escapeHtml(point.value)}</strong>
+          <p><b>${escapeHtml(point.status)}</b></p>
+          <p>${escapeHtml(point.interpretation)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderMarket(market) {
+      document.getElementById("marketMode").textContent = market.market_mode?.label || "Рыночный режим не указан";
+      document.getElementById("marketExplanation").textContent = market.market_mode?.explanation || market.short_answer || "";
+      document.getElementById("basisRows").innerHTML = (market.basis || []).map((basis) => `
+        <tr>
+          <td>${escapeHtml(typeText(basis.type))}</td>
+          <td>${escapeHtml(basis.period)}</td>
+          <td>${escapeHtml(basis.role)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function typeText(type) {
+      const map = {
+        annual_digest: "Годовой обзор",
+        quarterly_digest: "Квартальный обзор",
+        monthly_digest: "Месячный обзор",
+        weekly_digest: "Недельный срез",
+        current_situation_radar: "Сводный радар"
+      };
+      return map[type] || type || "Основание";
+    }
+
+    function renderLimitations(limitations) {
+      document.getElementById("limitations").innerHTML = (limitations || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+    }
+
+    function render(market, internal) {
+      document.getElementById("pageTitle").textContent = internal.overall_mode?.label || internal.practice?.label || "Практика 1С";
+      document.getElementById("pageSubtitle").textContent = internal.overall_mode?.explanation || internal.disclaimer || "";
+      document.getElementById("overallExplanation").textContent = internal.disclaimer || "";
+      document.getElementById("asOfDate").textContent = `дата оценки: ${internal.as_of_date || "не указана"}`;
+      document.getElementById("loadStatus").textContent = "данные: внешний рынок + демо 1С";
+
+      renderSummaryCards(internal.summary_cards);
+      renderComparisons(internal.comparisons);
+      renderChecks(internal.comparisons);
+      renderPlanning(internal.planning_points);
+      renderMarket(market);
+      renderLimitations(internal.limitations);
+    }
+
+    async function loadJson(url) {
+      const response = await fetch(url, { cache: "no-store" });
+      if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+      return response.json();
+    }
+
+    async function boot() {
+      try {
+        const [market, internal] = await Promise.all([
+          loadJson(MARKET_SNAPSHOT_URL),
+          loadJson(INTERNAL_1C_URL)
+        ]);
+        render(market, internal);
+      } catch (error) {
+        console.error(error);
+        document.getElementById("loadStatus").textContent = "данные: ошибка загрузки";
+        document.getElementById("pageSubtitle").innerHTML = `<span class="error">Данные не загрузились. Откройте внутренний прототип через локальный сервер, а не через file://.</span>`;
+      }
+    }
+
+    boot();
+  </script>
+</body>
+</html>
