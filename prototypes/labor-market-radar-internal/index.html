@@ -1,325 +1,453 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Labor Market Radar | Практика 1С</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Labor Market Radar | Внутренний режим</title>
   <style>
     :root {
-      --bg: #f5f7f4;
-      --surface: #ffffff;
-      --ink: #17231d;
-      --muted: #62706a;
-      --line: #d8ded6;
-      --accent: #087a65;
-      --accent-dark: #075f50;
-      --soft: #e8f2ee;
-      --warn: #c77d14;
-      --warn-bg: #fff3d6;
-      --danger: #b9413d;
-      --danger-bg: #fce8e6;
-      --blue: #2f67a8;
-      --blue-bg: #e8f0fe;
+      --bg: #f6f7f3;
+      --panel: #ffffff;
+      --ink: #17211c;
+      --muted: #637068;
+      --line: #d9ded5;
+      --green: #1f7a5a;
+      --teal: #0f7f8c;
+      --blue: #315f9f;
+      --amber: #bd7d22;
+      --red: #b4473f;
+      --soft: #edf4ef;
+      --shadow: 0 18px 44px rgba(37, 47, 42, .10);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fff 0, var(--bg) 360px);
       color: var(--ink);
-      background: var(--bg);
     }
 
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
     .app {
-      display: grid;
-      grid-template-columns: 280px 1fr;
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
     }
 
     aside {
       position: sticky;
       top: 0;
       height: 100vh;
-      padding: 28px;
-      background: #fbfcfa;
+      padding: 22px 18px;
       border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, .76);
+      backdrop-filter: blur(18px);
     }
 
     .brand {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: center;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
     }
 
-    .logo {
+    .mark {
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
-      width: 54px;
-      height: 54px;
       border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), #285b9d);
-      color: white;
+      background: var(--green);
+      color: #fff;
       font-weight: 800;
-      letter-spacing: 0;
     }
 
-    .brand strong {
-      display: block;
-      font-size: 18px;
-      line-height: 1.2;
-    }
+    .brand strong { display: block; font-size: 15px; }
+    .brand span { color: var(--muted); font-size: 12px; }
 
-    .brand span {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    nav {
+    .nav {
       display: grid;
-      gap: 10px;
+      gap: 8px;
     }
 
-    nav button {
-      width: 100%;
-      padding: 14px 16px;
+    .nav button {
+      min-height: 40px;
+      padding: 10px 12px;
       border: 1px solid transparent;
       border-radius: 8px;
       background: transparent;
       color: var(--muted);
-      font: inherit;
-      font-size: 18px;
       text-align: left;
       cursor: pointer;
+      font: inherit;
     }
 
-    nav button.active {
+    .nav button.active {
+      border-color: #cfe0d2;
+      background: #eef5ef;
       color: var(--ink);
-      background: var(--soft);
-      border-color: #cddbd4;
       font-weight: 700;
     }
 
-    .side-note {
-      margin-top: 34px;
-      padding: 18px;
+    .side-block {
+      margin-top: 28px;
+      padding: 14px;
       border: 1px solid var(--line);
       border-radius: 8px;
+      background: #fbfcf9;
       color: var(--muted);
+      font-size: 13px;
       line-height: 1.45;
-      background: var(--surface);
+    }
+
+    .side-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+      font-size: 12px;
+    }
+
+    .status-pill {
+      width: fit-content;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f0f4f1;
+      color: var(--muted);
+    }
+
+    .status-pill.warning {
+      background: #fff5df;
+      color: var(--amber);
     }
 
     main {
-      padding: 36px;
+      min-width: 0;
+      padding: 28px 24px 42px;
     }
 
     .topbar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
       justify-content: space-between;
+      gap: 20px;
       align-items: flex-start;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
 
     h1 {
+      margin: 0 0 8px;
       max-width: 980px;
-      margin: 0;
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.08;
+      font-size: 38px;
+      line-height: 1.05;
       letter-spacing: 0;
     }
 
     .subtitle {
-      max-width: 920px;
-      margin: 14px 0 0;
+      max-width: 860px;
+      margin: 0;
       color: var(--muted);
-      font-size: 22px;
-      line-height: 1.35;
+      line-height: 1.48;
+      font-size: 17px;
     }
 
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: flex-end;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 38px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: var(--surface);
+    .source {
+      min-width: 230px;
+      padding: 12px;
       border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
       color: var(--muted);
-      font-size: 14px;
-    }
-
-    .pill.demo {
-      color: #8a5a00;
-      background: var(--warn-bg);
-      border-color: #f1d087;
-      font-weight: 700;
+      font-size: 12px;
+      line-height: 1.45;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .panel,
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
     }
 
     .panel {
-      padding: 24px;
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: var(--shadow);
     }
 
-    .span-12 { grid-column: span 12; }
-    .span-8 { grid-column: span 8; }
-    .span-6 { grid-column: span 6; }
+    .span-3 { grid-column: span 3; }
     .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-12 { grid-column: span 12; }
+
+    .metrics-row {
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric-card {
+      min-width: 0;
+      min-height: 154px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: visible;
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+
+    .metric-card:has(.info-dot:hover),
+    .metric-card:has(.info-dot:focus) {
+      z-index: 20;
+    }
+
+    .metric-main {
+      padding: 16px;
+    }
 
     h2 {
-      margin: 0 0 16px;
-      font-size: 24px;
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .metric-label {
+      min-height: 32px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .metric-title {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .info-dot {
+      position: relative;
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #cbd8cf;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      background: #f6fbf7;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: help;
+    }
+
+    .info-dot::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      z-index: 10;
+      top: 24px;
+      right: 0;
+      width: min(320px, 78vw);
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: left;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
+      transition: opacity .16s ease, transform .16s ease;
+      white-space: normal;
+    }
+
+    .info-dot:hover::after,
+    .info-dot:focus::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .metric-value {
+      margin-top: 8px;
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .metric-caption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .metric-caption.high { color: var(--green); }
+    .metric-caption.medium { color: var(--amber); }
+    .metric-caption.low { color: var(--red); }
+
+    .metric-meaning {
+      padding: 12px 16px 14px;
+      border-top: 1px solid var(--line);
+      border-radius: 0 0 7px 7px;
+      background: #f6fbf7;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.42;
+    }
+
+    .metric-meaning strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 12px;
       line-height: 1.2;
     }
 
-    h3 {
-      margin: 0 0 8px;
-      font-size: 19px;
-      line-height: 1.2;
+    .cards {
+      display: grid;
+      gap: 10px;
     }
 
-    p {
+    .card {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .card strong { font-size: 15px; line-height: 1.3; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.45; font-size: 13px; }
+
+    .insight-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .insight-item {
+      display: grid;
+      gap: 5px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .insight-item strong {
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .insight-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.42;
+    }
+
+    .salary-strip {
+      display: grid;
+      grid-template-columns: 1.15fr repeat(3, minmax(0, .72fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .salary-summary {
+      padding: 12px;
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      background: #fffaf0;
+      color: var(--muted);
+      font-size: 13px;
       line-height: 1.45;
     }
 
-    .metric {
-      padding: 22px;
+    .salary-point {
+      display: grid;
+      gap: 5px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
     }
 
-    .metric small {
-      display: block;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .metric strong {
-      display: block;
-      margin-top: 10px;
-      font-size: 30px;
+    .salary-point b {
+      font-size: 20px;
       line-height: 1.1;
     }
 
-    .metric p {
-      margin: 10px 0 0;
+    .salary-point small {
       color: var(--muted);
+      line-height: 1.35;
     }
 
-    .comparison {
-      display: grid;
-      grid-template-columns: 1fr 1fr 220px;
-      gap: 16px;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fbfcfa;
-    }
-
-    .comparison + .comparison {
-      margin-top: 14px;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: fit-content;
-      min-height: 34px;
-      padding: 7px 12px;
+    .badge {
+      flex: 0 0 auto;
+      max-width: 190px;
+      padding: 4px 8px;
       border-radius: 999px;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .status.confirmed {
-      color: #12633a;
-      background: #dff3e4;
-    }
-
-    .status.diverges {
-      color: #895200;
-      background: var(--warn-bg);
-    }
-
-    .status.insufficient {
-      color: #555;
-      background: #ecefec;
-    }
-
-    .status.early {
-      color: #1a56a3;
-      background: var(--blue-bg);
-    }
-
-    .status.demo {
-      color: #7a4111;
-      background: #ffe6c7;
-    }
-
-    .muted {
+      background: #eef3f0;
       color: var(--muted);
+      font-size: 12px;
+      white-space: normal;
+      text-align: center;
     }
 
-    .list {
+    .badge.confirmed, .badge.high { background: #e8f3ed; color: var(--green); }
+    .badge.watch, .badge.medium { background: #fff5df; color: var(--amber); }
+    .badge.manual_check_required, .badge.low { background: #fbecea; color: var(--red); }
+
+    .actions {
       display: grid;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
     }
 
-    .list li {
-      padding: 14px 16px;
-      border: 1px solid var(--line);
+    .action {
+      min-height: 148px;
+      padding: 12px;
+      border-left: 4px solid var(--green);
       border-radius: 8px;
-      background: #fbfcfa;
+      background: #fff;
     }
 
-    .view {
-      display: none;
-    }
-
-    .view.active {
-      display: block;
-    }
+    .action:nth-child(2n) { border-color: var(--blue); }
+    .action:nth-child(3n) { border-color: var(--amber); }
+    .action b { display: block; margin-bottom: 8px; line-height: 1.3; }
+    .action p { margin: 0; color: var(--muted); line-height: 1.42; font-size: 13px; }
+    .action small { display: block; margin-top: 10px; color: var(--muted); line-height: 1.35; }
 
     .table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 15px;
+      font-size: 13px;
     }
 
-    .table th,
-    .table td {
-      padding: 12px;
+    .table th, .table td {
+      padding: 10px 8px;
       border-bottom: 1px solid var(--line);
       text-align: left;
       vertical-align: top;
+      line-height: 1.4;
     }
 
     .table th {
@@ -327,33 +455,117 @@
       font-weight: 700;
     }
 
-    .error {
-      padding: 16px 18px;
-      border: 1px solid #efb1ac;
+    .note {
+      padding: 12px;
+      border-left: 4px solid var(--amber);
       border-radius: 8px;
-      color: #8b1e1a;
-      background: var(--danger-bg);
+      background: #fffaf0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 13px;
     }
 
-    @media (max-width: 980px) {
-      .app {
-        grid-template-columns: 1fr;
-      }
+    .internal-warning {
+      padding: 14px 16px;
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      background: #fff8e8;
+      color: #6b4b19;
+      line-height: 1.5;
+    }
 
+    .internal-summary,
+    .planning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .internal-kpi {
+      min-height: 142px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcf9;
+    }
+
+    .internal-kpi small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .internal-kpi b {
+      display: block;
+      margin: 8px 0 4px;
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    .internal-kpi p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .comparison-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .comparison-card {
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr .8fr;
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .comparison-card h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .comparison-card p {
+      margin: 6px 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .badge.diverges { background: #fff5df; color: var(--amber); }
+    .badge.insufficient { background: #f0f4f1; color: var(--muted); }
+    .badge.early { background: #fbecea; color: var(--red); }
+
+    .hidden { display: none; }
+
+    @media (max-width: 1080px) {
+      .app { grid-template-columns: 1fr; }
       aside {
         position: static;
         height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
       }
+      .nav { grid-template-columns: repeat(5, 1fr); }
+      .topbar { display: grid; }
+      .source { min-width: 0; }
+      .span-3, .span-4, .span-6 { grid-column: span 12; }
+      .metrics-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .salary-strip { grid-template-columns: 1fr; }
+      .actions { grid-template-columns: 1fr; }
+      .internal-summary, .planning-grid { grid-template-columns: 1fr; }
+      .comparison-card { grid-template-columns: 1fr; }
+    }
 
-      .comparison {
-        grid-template-columns: 1fr;
-      }
-
-      .span-8,
-      .span-6,
-      .span-4 {
-        grid-column: span 12;
-      }
+    @media (max-width: 680px) {
+      main, aside { padding: 16px; }
+      h1 { font-size: 28px; }
+      .subtitle { font-size: 15px; }
+      .nav { grid-template-columns: 1fr; }
+      .metrics-row { grid-template-columns: 1fr; }
+      .card-head { display: grid; }
+      .badge { max-width: none; width: fit-content; }
     }
   </style>
 </head>
@@ -361,128 +573,191 @@
   <div class="app">
     <aside>
       <div class="brand">
-        <div class="logo">1С</div>
+        <div class="mark">LM</div>
         <div>
           <strong>Labor Market Radar</strong>
-          <span>Внутренний демо-режим</span>
+          <span>Оценка рынка труда + практика 1С</span>
         </div>
       </div>
-      <nav aria-label="Разделы">
-        <button class="active" data-view="practice">Практика 1С</button>
-        <button data-view="market">Внешний рынок</button>
-        <button data-view="checks">Что проверить</button>
-        <button data-view="limits">Ограничения</button>
+
+      <nav class="nav" aria-label="Разделы">
+        <button class="active" data-view="dashboard">Радар</button>
+        <button data-view="signals">Сигналы</button>
+        <button data-view="actions">Действия</button>
+        <button data-view="basis">Основания</button>
+        <button data-view="practice1c">Практика 1С</button>
       </nav>
-      <div class="side-note">
-        <strong>Демо-режим.</strong>
-        <p>Экран показывает механику будущего внутреннего продукта на вымышленных данных. Реальные данные практики 1С сюда не загружены.</p>
+
+      <div class="side-block">
+        Локальная версия сохраняет внешний радар и добавляет слой сверки с практикой 1С. Сейчас внутренний слой работает на демонстрационных данных.
+        <div class="side-meta">
+          <span class="status-pill" id="snapshotStatus">статус: загрузка</span>
+          <span class="status-pill warning" id="methodologyStatus">методика: загрузка</span>
+          <span id="asOfDate">дата оценки: ...</span>
+        </div>
       </div>
     </aside>
 
     <main>
-      <div class="topbar">
+      <section class="topbar">
         <div>
-          <h1 id="pageTitle">Практика 1С</h1>
-          <p class="subtitle" id="pageSubtitle">Загружаю внешний рынок и демо-слой практики 1С...</p>
+          <h1 id="pageTitle">Радар рынка труда ИТ</h1>
+          <p class="subtitle" id="shortAnswer">Загружаю данные...</p>
         </div>
-        <div class="pills">
-          <span class="pill demo">демо на вымышленных данных</span>
-          <span class="pill" id="asOfDate">дата оценки: ...</span>
-          <span class="pill" id="loadStatus">данные: загрузка</span>
-        </div>
-      </div>
-
-      <section class="view active" id="view-practice">
-        <div class="grid">
-          <article class="panel span-12">
-            <h2>Общий вывод по практике</h2>
-            <p id="overallExplanation" class="muted"></p>
-          </article>
-
-          <div id="summaryCards" class="grid span-12"></div>
-
-          <article class="panel span-12">
-            <h2>Сверка рынка и практики 1С</h2>
-            <div id="comparisons"></div>
-          </article>
+        <div class="source">
+          <strong>Источник данных</strong><br>
+          <span id="sourcePath">Загрузка оснований...</span><br>
+          <span id="loadState">Загрузка...</span>
         </div>
       </section>
 
-      <section class="view" id="view-market">
-        <div class="grid">
-          <article class="panel span-12">
-            <h2>Внешний рыночный режим</h2>
-            <h3 id="marketMode"></h3>
-            <p id="marketExplanation" class="muted"></p>
-          </article>
-          <article class="panel span-12">
-            <h2>Внешние основания</h2>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Основание</th>
-                  <th>Период</th>
-                  <th>Роль</th>
-                </tr>
-              </thead>
-              <tbody id="basisRows"></tbody>
-            </table>
-          </article>
-        </div>
+      <section id="dashboard" class="view grid">
+        <div class="metrics-row" id="metricsRow"></div>
+
+        <article class="panel span-6">
+          <h2>Что произошло за период</h2>
+          <div class="insight-list" id="periodOverview"></div>
+        </article>
+
+        <article class="panel span-6">
+          <h2>Яркие события ИТ-рынка</h2>
+          <div class="insight-list" id="itMarketEvents"></div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Зарплатный фон</h2>
+          <div class="salary-strip" id="salaryDynamics"></div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Главные сигналы</h2>
+          <div class="cards" id="topSignals"></div>
+        </article>
       </section>
 
-      <section class="view" id="view-checks">
-        <div class="grid">
-          <article class="panel span-6">
-            <h2>Что проверить</h2>
-            <ul class="list" id="checkList"></ul>
-          </article>
-          <article class="panel span-6">
-            <h2>Что делать</h2>
-            <ul class="list" id="actionList"></ul>
-          </article>
-          <article class="panel span-12">
-            <h2>Реперные точки планирования</h2>
-            <div id="planningPoints" class="grid"></div>
-          </article>
-        </div>
+      <section id="signals" class="view grid hidden">
+        <article class="panel span-12">
+          <h2>Матрица сигналов</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Сигнал</th>
+                <th>Статус</th>
+                <th>Сила</th>
+                <th>Что означает сейчас</th>
+                <th>Основание</th>
+              </tr>
+            </thead>
+            <tbody id="signalsTable"></tbody>
+          </table>
+        </article>
       </section>
 
-      <section class="view" id="view-limits">
-        <div class="grid">
-          <article class="panel span-12">
-            <h2>Ограничения</h2>
-            <ul class="list" id="limitations"></ul>
-          </article>
-        </div>
+      <section id="actions" class="view grid hidden">
+        <article class="panel span-12">
+          <h2>Рекомендуемые действия</h2>
+          <div class="actions" id="actionsList"></div>
+        </article>
+        <article class="panel span-12">
+          <h2>Ограничения и ручные проверки</h2>
+          <div class="cards" id="limitationsList"></div>
+        </article>
+      </section>
+
+      <section id="basis" class="view grid hidden">
+        <article class="panel span-12">
+          <h2>Выпуски-основания</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Период</th>
+                <th>Тип</th>
+                <th>Файл</th>
+                <th>Роль в snapshot</th>
+              </tr>
+            </thead>
+            <tbody id="basisTable"></tbody>
+          </table>
+        </article>
+      </section>
+
+      <section id="practice1c" class="view grid hidden">
+        <article class="panel span-12">
+          <h2>Практика 1С: сверка с рынком</h2>
+          <div class="internal-warning" id="internalDisclaimer">Загружаю внутренний демонстрационный слой...</div>
+        </article>
+
+        <article class="panel span-12">
+          <h2 id="internalMode">Практика 1С</h2>
+          <p class="subtitle" id="internalModeExplanation">Загружаю вывод по практике...</p>
+          <div class="internal-summary" id="internalSummaryCards"></div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Где практика совпадает с рынком, а где отличается</h2>
+          <div class="comparison-list" id="internalComparisons"></div>
+        </article>
+
+        <article class="panel span-6">
+          <h2>Что проверить вручную</h2>
+          <div class="actions" id="internalChecks"></div>
+        </article>
+
+        <article class="panel span-6">
+          <h2>Что делать дальше</h2>
+          <div class="actions" id="internalActions"></div>
+        </article>
+
+        <article class="panel span-12">
+          <h2>Плановые ориентиры</h2>
+          <div class="planning-grid" id="internalPlanning"></div>
+        </article>
       </section>
     </main>
   </div>
 
   <script>
-    const MARKET_SNAPSHOT_URL = "../../data/current_radar/radar_snapshot.json";
+    const SNAPSHOT_URL = "../../data/current_radar/radar_snapshot.json";
     const INTERNAL_1C_URL = "../../data/internal_1c_demo/internal_1c_snapshot.json";
 
-    const statusClassMap = {
-      "подтверждается": "confirmed",
-      "расходится": "diverges",
-      "недостаточно данных": "insufficient",
-      "ранний внутренний сигнал": "early"
+    const fallbackSnapshot = {
+      schema_version: "fallback",
+      snapshot_id: "fallback_not_loaded",
+      as_of_date: "unknown",
+      status: "draft",
+      methodology_status: "expert_pilot",
+      dashboard_binding: "not_connected",
+      market_mode: {
+        label: "Данные не загружены",
+        explanation: "Не удалось получить рабочий файл с оценкой рынка."
+      },
+      short_answer: "Не удалось загрузить данные дашборда. Проверьте публикацию рабочего файла.",
+      period_overview: [],
+      it_market_events: [],
+      salary_dynamics: null,
+      indexes: [],
+      signals: [],
+      actions: [],
+      limitations: [
+        {
+          id: "snapshot_load_error",
+          level: "technical",
+          text: "Дашборд не получил данные из radar_snapshot.json и не должен использоваться как актуальная картина.",
+          manual_check_required: true
+        }
+      ],
+      basis: []
     };
 
-    document.querySelectorAll("nav button").forEach((button) => {
+    document.querySelectorAll(".nav button").forEach(button => {
       button.addEventListener("click", () => {
-        document.querySelectorAll("nav button").forEach((item) => item.classList.remove("active"));
-        document.querySelectorAll(".view").forEach((view) => view.classList.remove("active"));
+        document.querySelectorAll(".nav button").forEach(item => item.classList.remove("active"));
         button.classList.add("active");
-        document.getElementById(`view-${button.dataset.view}`).classList.add("active");
+        document.querySelectorAll(".view").forEach(view => {
+          view.classList.toggle("hidden", view.id !== button.dataset.view);
+        });
       });
     });
-
-    function statusBadge(status) {
-      const className = statusClassMap[status] || "demo";
-      return `<span class="status ${className}">${escapeHtml(status || "статус не указан")}</span>`;
-    }
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -493,127 +768,307 @@
         .replaceAll("'", "&#039;");
     }
 
-    function renderSummaryCards(cards) {
-      const container = document.getElementById("summaryCards");
-      container.innerHTML = (cards || []).map((card) => `
-        <article class="card metric span-4">
-          <small>${escapeHtml(card.title)}</small>
-          <strong>${escapeHtml(card.value)}</strong>
-          <p><b>${escapeHtml(card.label)}</b></p>
-          <p>${escapeHtml(card.meaning)}</p>
-        </article>
-      `).join("");
-    }
-
-    function renderComparisons(comparisons) {
-      const container = document.getElementById("comparisons");
-      container.innerHTML = (comparisons || []).map((item) => `
-        <section class="comparison">
-          <div>
-            <h3>${escapeHtml(item.theme)}</h3>
-            <p><b>Рынок:</b> ${escapeHtml(item.external_signal)}</p>
-            <p class="muted">${escapeHtml(item.external_basis)}</p>
-          </div>
-          <div>
-            <p><b>Практика 1С:</b> ${escapeHtml(item.internal_fact)}</p>
-            <p><b>${escapeHtml(item.metric?.name)}:</b> ${escapeHtml(item.metric?.value)} · ${escapeHtml(item.metric?.benchmark)}</p>
-            <p class="muted">${escapeHtml(item.explanation)}</p>
-          </div>
-          <div>
-            ${statusBadge(item.status)}
-            <p><b>Уверенность:</b> ${escapeHtml(item.confidence)}</p>
-            <p>${escapeHtml(item.recommended_action)}</p>
-          </div>
-        </section>
-      `).join("");
-    }
-
-    function renderChecks(comparisons) {
-      const checks = [];
-      const actions = [];
-      (comparisons || []).forEach((item) => {
-        (item.what_to_check || []).forEach((check) => checks.push(`${item.theme}: ${check}`));
-        if (item.recommended_action) actions.push(`${item.theme}: ${item.recommended_action}`);
-      });
-
-      document.getElementById("checkList").innerHTML = checks.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-      document.getElementById("actionList").innerHTML = actions.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-    }
-
-    function renderPlanning(points) {
-      document.getElementById("planningPoints").innerHTML = (points || []).map((point) => `
-        <article class="card metric span-4">
-          <small>${escapeHtml(point.title)}</small>
-          <strong>${escapeHtml(point.value)}</strong>
-          <p><b>${escapeHtml(point.status)}</b></p>
-          <p>${escapeHtml(point.interpretation)}</p>
-        </article>
-      `).join("");
-    }
-
-    function renderMarket(market) {
-      document.getElementById("marketMode").textContent = market.market_mode?.label || "Рыночный режим не указан";
-      document.getElementById("marketExplanation").textContent = market.market_mode?.explanation || market.short_answer || "";
-      document.getElementById("basisRows").innerHTML = (market.basis || []).map((basis) => `
-        <tr>
-          <td>${escapeHtml(typeText(basis.type))}</td>
-          <td>${escapeHtml(basis.period)}</td>
-          <td>${escapeHtml(basis.role)}</td>
-        </tr>
-      `).join("");
-    }
-
-    function typeText(type) {
+    function statusText(value) {
       const map = {
+        pilot: "предварительная экспертная оценка",
+        draft: "черновик",
+        approved: "утверждено",
+        archived: "архив",
+        expert_pilot: "экспертная методика, не математическая модель",
+        partially_validated: "частично подтверждена",
+        mathematically_validated: "математически подтверждена",
+        not_connected: "данные не подключены",
+        connected_with_fallback: "данные загружены из рабочего файла",
+        connected_required: "только рабочий файл данных",
+        confirmed: "подтвержден",
+        supported: "поддержан",
+        watch: "наблюдение",
+        manual_check_required: "ручная проверка",
+        high: "высокая",
+        medium: "средняя",
+        low: "низкая"
+      };
+      return map[value] || value || "не указано";
+    }
+
+    function tooltipText(index) {
+      const tip = index?.tooltip;
+      if (!tip) return index?.explanation || "Пояснение пока не заполнено.";
+      return [
+        `Что показывает: ${tip.what}`,
+        `Зачем нужен: ${tip.why}`,
+        `На что смотрим: ${tip.inputs}`,
+        `Как читать: ${tip.how_to_read}`
+      ].join("\n\n");
+    }
+
+    function basisHumanName(item) {
+      const typeNames = {
         annual_digest: "Годовой обзор",
         quarterly_digest: "Квартальный обзор",
         monthly_digest: "Месячный обзор",
         weekly_digest: "Недельный срез",
         current_situation_radar: "Сводный радар"
       };
-      return map[type] || type || "Основание";
+      const type = typeNames[item.type] || item.type || "Основание";
+      return `${type}: ${item.period || "период не указан"}`;
+    }
+
+    function confidenceClass(value) {
+      if (value === "high" || value === "confirmed") return "high";
+      if (value === "low" || value === "manual_check_required") return "low";
+      return "medium";
+    }
+
+    function renderMetrics(indexes) {
+      document.getElementById("metricsRow").innerHTML = indexes.map(index => `
+        <article class="metric-card">
+          <div class="metric-main">
+            <div class="metric-title">
+              <div class="metric-label">${escapeHtml(index.name)}</div>
+              <span class="info-dot" tabindex="0" aria-label="Пояснение индекса" data-tooltip="${escapeHtml(tooltipText(index))}">?</span>
+            </div>
+            <div class="metric-value">${escapeHtml(index.score)}</div>
+            <div class="metric-caption ${confidenceClass(index?.confidence)}">${escapeHtml(index.label)}</div>
+          </div>
+          <div class="metric-meaning">
+            <strong>Это означает, что</strong>
+            ${escapeHtml(index.explanation)}
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderSignals(signals) {
+      const visibleSignals = signals.slice(0, 3);
+      document.getElementById("topSignals").innerHTML = visibleSignals.map(signal => `
+        <div class="card">
+          <div class="card-head">
+            <strong>${escapeHtml(signal.name)}</strong>
+            <span class="badge ${escapeHtml(signal.status)}">${escapeHtml(statusText(signal.status))}</span>
+          </div>
+          <p>${escapeHtml(signal.meaning_now)}</p>
+          <p><strong>Основание:</strong> ${escapeHtml(signal.evidence)}</p>
+        </div>
+      `).join("");
+
+      document.getElementById("signalsTable").innerHTML = signals.map(signal => `
+        <tr>
+          <td>${escapeHtml(signal.name)}</td>
+          <td><span class="badge ${escapeHtml(signal.status)}">${escapeHtml(statusText(signal.status))}</span></td>
+          <td>${escapeHtml(statusText(signal.strength))}</td>
+          <td>${escapeHtml(signal.meaning_now)}</td>
+          <td>${escapeHtml(signal.evidence)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderInsightList(elementId, items, emptyText) {
+      const element = document.getElementById(elementId);
+      if (!items?.length) {
+        element.innerHTML = `<div class="note">${escapeHtml(emptyText)}</div>`;
+        return;
+      }
+      element.innerHTML = items.map(item => `
+        <div class="insight-item">
+          <strong>${escapeHtml(item.title)}</strong>
+          <p>${escapeHtml(item.text)}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderSalaryDynamics(salary) {
+      const element = document.getElementById("salaryDynamics");
+      if (!salary) {
+        element.innerHTML = `<div class="note">Зарплатная динамика пока не подключена к рабочему файлу данных.</div>`;
+        return;
+      }
+      const items = salary.items || [];
+      element.innerHTML = `
+        <div class="salary-summary">
+          <strong>${escapeHtml(salary.title || "Зарплатный фон")}</strong><br>
+          ${escapeHtml(salary.summary || "")}
+        </div>
+        ${items.map(item => `
+          <div class="salary-point">
+            <small>${escapeHtml(item.period)}</small>
+            <b>${escapeHtml(item.value)}</b>
+            <small>${escapeHtml(item.source)}</small>
+          </div>
+        `).join("")}
+      `;
+    }
+
+    function renderActions(actions) {
+      document.getElementById("actionsList").innerHTML = actions.map(action => `
+        <div class="action">
+          <b>${escapeHtml(action.title)}</b>
+          <p>${escapeHtml(action.rationale)}</p>
+          <small><strong>Срочность:</strong> ${escapeHtml(statusText(action.urgency))}<br><strong>Владелец:</strong> ${escapeHtml(action.owner)}</small>
+        </div>
+      `).join("");
     }
 
     function renderLimitations(limitations) {
-      document.getElementById("limitations").innerHTML = (limitations || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+      document.getElementById("limitationsList").innerHTML = limitations.map(item => `
+        <div class="card">
+          <div class="card-head">
+            <strong>${escapeHtml(item.level)}</strong>
+            <span class="badge ${item.manual_check_required ? "manual_check_required" : ""}">${item.manual_check_required ? "ручная проверка" : "зафиксировано"}</span>
+          </div>
+          <p>${escapeHtml(item.text)}</p>
+        </div>
+      `).join("");
     }
 
-    function render(market, internal) {
-      document.getElementById("pageTitle").textContent = internal.overall_mode?.label || internal.practice?.label || "Практика 1С";
-      document.getElementById("pageSubtitle").textContent = internal.overall_mode?.explanation || internal.disclaimer || "";
-      document.getElementById("overallExplanation").textContent = internal.disclaimer || "";
-      document.getElementById("asOfDate").textContent = `дата оценки: ${internal.as_of_date || "не указана"}`;
-      document.getElementById("loadStatus").textContent = "данные: внешний рынок + демо 1С";
-
-      renderSummaryCards(internal.summary_cards);
-      renderComparisons(internal.comparisons);
-      renderChecks(internal.comparisons);
-      renderPlanning(internal.planning_points);
-      renderMarket(market);
-      renderLimitations(internal.limitations);
+    function renderBasis(basis) {
+      document.getElementById("basisTable").innerHTML = basis.map(item => `
+        <tr>
+          <td>${escapeHtml(item.period)}</td>
+          <td>${escapeHtml(item.type)}</td>
+          <td><a href="../../${encodeURI(item.path)}">${escapeHtml(item.path)}</a></td>
+          <td>${escapeHtml(item.role)}</td>
+        </tr>
+      `).join("");
     }
 
-    async function loadJson(url) {
-      const response = await fetch(url, { cache: "no-store" });
-      if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
-      return response.json();
+    function renderSourceSummary(basis) {
+      if (!basis.length) {
+        document.getElementById("sourcePath").textContent = "Основания не указаны";
+        return;
+      }
+      document.getElementById("sourcePath").innerHTML = basis
+        .slice(0, 4)
+        .map(item => escapeHtml(basisHumanName(item)))
+        .join("<br>");
     }
 
-    async function boot() {
+    function internalStatusClass(status) {
+      const key = String(status || "").toLowerCase().replaceAll(" ", "_");
+      const map = {
+        "подтверждается": "confirmed",
+        "расходится": "diverges",
+        "недостаточно_данных": "insufficient",
+        "ранний_внутренний_сигнал": "early"
+      };
+      return map[key] || "";
+    }
+
+    function renderInternal1C(internal) {
+      document.getElementById("internalDisclaimer").textContent =
+        internal.disclaimer || "Демо-слой практики 1С. Реальные внутренние данные сюда не публикуются.";
+      document.getElementById("internalMode").textContent =
+        internal.overall_mode?.label || internal.practice?.label || "Практика 1С";
+      document.getElementById("internalModeExplanation").textContent =
+        internal.overall_mode?.explanation || "";
+
+      document.getElementById("internalSummaryCards").innerHTML = (internal.summary_cards || []).map(card => `
+        <article class="internal-kpi">
+          <small>${escapeHtml(card.title)}</small>
+          <b>${escapeHtml(card.value)}</b>
+          <p><strong>${escapeHtml(card.label)}</strong></p>
+          <p>${escapeHtml(card.meaning)}</p>
+        </article>
+      `).join("");
+
+      document.getElementById("internalComparisons").innerHTML = (internal.comparisons || []).map(item => `
+        <article class="comparison-card">
+          <div>
+            <h3>${escapeHtml(item.theme)}</h3>
+            <p><strong>Рынок:</strong> ${escapeHtml(item.external_signal)}</p>
+            <p><strong>Основание:</strong> ${escapeHtml(item.external_basis)}</p>
+          </div>
+          <div>
+            <p><strong>Практика 1С:</strong> ${escapeHtml(item.internal_fact)}</p>
+            <p><strong>${escapeHtml(item.metric?.name)}:</strong> ${escapeHtml(item.metric?.value)} · ${escapeHtml(item.metric?.benchmark)}</p>
+            <p>${escapeHtml(item.explanation)}</p>
+          </div>
+          <div>
+            <span class="badge ${internalStatusClass(item.status)}">${escapeHtml(item.status)}</span>
+            <p><strong>Уверенность:</strong> ${escapeHtml(statusText(item.confidence))}</p>
+            <p>${escapeHtml(item.recommended_action)}</p>
+          </div>
+        </article>
+      `).join("");
+
+      const checks = [];
+      const actions = [];
+      (internal.comparisons || []).forEach(item => {
+        (item.what_to_check || []).forEach(check => checks.push(`${item.theme}: ${check}`));
+        if (item.recommended_action) actions.push(`${item.theme}: ${item.recommended_action}`);
+      });
+
+      document.getElementById("internalChecks").innerHTML = checks.map(item => `
+        <div class="action"><b>${escapeHtml(item)}</b></div>
+      `).join("");
+
+      document.getElementById("internalActions").innerHTML = actions.map(item => `
+        <div class="action"><b>${escapeHtml(item)}</b></div>
+      `).join("");
+
+      document.getElementById("internalPlanning").innerHTML = (internal.planning_points || []).map(point => `
+        <article class="internal-kpi">
+          <small>${escapeHtml(point.title)}</small>
+          <b>${escapeHtml(point.value)}</b>
+          <p><strong>${escapeHtml(point.status)}</strong></p>
+          <p>${escapeHtml(point.interpretation)}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderSnapshot(snapshot, loadedFromJson) {
+      document.getElementById("pageTitle").textContent = snapshot.market_mode?.label || "Labor Market Radar";
+      document.getElementById("shortAnswer").textContent = snapshot.short_answer || "Нет краткого вывода.";
+      document.getElementById("snapshotStatus").textContent = `статус: ${statusText(snapshot.status)}`;
+      document.getElementById("methodologyStatus").textContent = `методика: ${statusText(snapshot.methodology_status)}`;
+      document.getElementById("asOfDate").textContent = `дата оценки: ${snapshot.as_of_date || "не указано"}`;
+      document.getElementById("loadState").textContent = loadedFromJson
+        ? `Данные загружены: ${snapshot.as_of_date || "дата не указана"}`
+        : "Внимание: рабочий файл данных не загрузился";
+
+      renderMetrics(snapshot.indexes || []);
+      renderInsightList("periodOverview", snapshot.period_overview || [], "Ключевые выводы периода пока не заполнены.");
+      renderInsightList("itMarketEvents", snapshot.it_market_events || [], "Яркие события ИТ-рынка пока не заполнены.");
+      renderSalaryDynamics(snapshot.salary_dynamics);
+      renderSignals(snapshot.signals || []);
+      renderActions(snapshot.actions || []);
+      renderLimitations(snapshot.limitations || []);
+      renderBasis(snapshot.basis || []);
+      renderSourceSummary(snapshot.basis || []);
+    }
+
+    async function loadSnapshot() {
       try {
-        const [market, internal] = await Promise.all([
-          loadJson(MARKET_SNAPSHOT_URL),
-          loadJson(INTERNAL_1C_URL)
-        ]);
-        render(market, internal);
+        const response = await fetch(SNAPSHOT_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error(`market HTTP ${response.status}`);
+        const snapshot = await response.json();
+        renderSnapshot(snapshot, true);
       } catch (error) {
-        console.error(error);
-        document.getElementById("loadStatus").textContent = "данные: ошибка загрузки";
-        document.getElementById("pageSubtitle").innerHTML = `<span class="error">Данные не загрузились. Откройте внутренний прототип через локальный сервер, а не через file://.</span>`;
+        console.error("Не удалось загрузить radar_snapshot.json", error);
+        renderSnapshot(fallbackSnapshot, false);
+      }
+
+      try {
+        const response = await fetch(INTERNAL_1C_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error(`internal HTTP ${response.status}`);
+        const internal = await response.json();
+        renderInternal1C(internal);
+      } catch (error) {
+        console.error("Не удалось загрузить internal_1c_snapshot.json", error);
+        renderInternal1C({
+          disclaimer: "Демо-слой практики 1С не загрузился. Откройте внутренний прототип через локальный сервер.",
+          overall_mode: {
+            label: "Практика 1С: данные не загружены",
+            explanation: "Внутренний demo-JSON недоступен."
+          },
+          summary_cards: [],
+          comparisons: [],
+          planning_points: []
+        });
       }
     }
 
-    boot();
+    loadSnapshot();
   </script>
 </body>
 </html>
